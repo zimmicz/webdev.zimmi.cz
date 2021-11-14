@@ -2,26 +2,24 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
 import { MenuLink } from '..';
+import { BLOG_TITLE, BLOG_DESCRIPTION } from '../../config';
 
 const Header = () => (
-    <header
-        style={{ fontFamily: 'Phenomena', fontWeight: 'bold' }}
-        className="px-5 xl:px-20 flex-wrap max-w-screen-xl md:flex-nowrap w-full flex text-white space-y-10 md:space-y-0 justify-center"
-    >
+    <header className="font-title font-bold px-5 xl:px-20 flex-wrap max-w-screen-xl md:flex-nowrap w-full flex text-white space-y-10 md:space-y-0 justify-center">
         <motion.div animate={{ x: 0 }} initial={{ x: -50 }} className="text-center md:text-left animate-shine">
             <Link href="/">
                 <a>
                     <h1 className="hover:animate-shine hover:bg-200% hover:bg-head-gradient hover:bg-clip-text hover:text-transparent text-5xl sm:text-7xl mb-3">
-                        Michal Zimmermann
+                        {BLOG_TITLE}
                     </h1>
                 </a>
             </Link>
-            <small className="text-lg md:text-2xl">Pieces of knowledge from the world of web development.</small>
+            <small className="text-lg md:text-2xl">{BLOG_DESCRIPTION}</small>
         </motion.div>
         <nav className="md:ml-auto flex">
             <ul className="w-full flex items-end text-white md:flex-col text-xl md:text-right space-x-10 md:space-y-5">
                 <li>
-                    <Link href="/hello" passHref>
+                    <Link href="/posts" passHref>
                         <MenuLink className="flex items-center space-x-3">
                             <span>posts</span>
                             <svg
@@ -42,7 +40,7 @@ const Header = () => (
                     </Link>
                 </li>
                 <li>
-                    <Link href="/" passHref>
+                    <Link href="/snippets" passHref>
                         <MenuLink className="flex items-center space-x-3">
                             <span>snippets</span>
                             <svg

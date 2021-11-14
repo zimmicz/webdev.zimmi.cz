@@ -1,22 +1,50 @@
 import React from 'react';
-import Head from 'next/head';
-import { Homepage } from '../components';
+import { HeroPost, Layout, Newsletter, Post } from '../components';
+import { getAllPosts } from '../lib/utils';
+import { getCurrentBreakPoint } from '../utils';
 
-export default function Home() {
+function Home({ posts }: { posts: ReturnType<typeof getAllPosts> }) {
+    const [breakpoint, setBreakpoint] = React.useState(() => getCurrentBreakPoint());
+    const howMany = ['2xl'].includes(breakpoint) ? 3 : 4;
+
+    React.useLayoutEffect(() => {
+        const handler = () => {
+            setBreakpoint(getCurrentBreakPoint());
+        };
+        window.addEventListener('resize', handler);
+
+        return () => window.removeEventListener('resize', handler);
+    }, []);
+
     return (
-        <div className="bg-gradient-to-b from-lavender to-st-patricks-blue flex flex-col items-center justify-center min-h-screen m-auto">
-            <Head>
-                <title>Michal Zimmermann | Pieces of knowledge from the world of web development.</title>
-                <link rel="icon" href="/favicon.ico" />
-                <link rel="stylesheet" href="/css/global.css" />
-                <link rel="preload" href="/fonts/Phenomena/Phenomena-Bold.woff2" as="font" crossOrigin="" />
-            </Head>
+        <Layout>
+            <div className="grid grid-cols-1 mx-5 xl:mx-20 md:grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-8">
+                {posts.map((post, index) => (
+                    <Post key={index} {...post} />
+                ))}
+            </div>
 
-            <Homepage />
+            <HeroPost {...posts[0]} />
 
-            <footer className="flex items-center justify-center w-full h-24 border-t bg-gray-900 text-white">
-                hello world
-            </footer>
-        </div>
+            <div className="grid grid-cols-1 mx-5 xl:mx-20 md:grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-8">
+                {posts.map((post, index) => (
+                    <Post key={index} {...post} />
+                ))}
+            </div>
+
+            <HeroPost {...posts[0]} />
+
+            <Newsletter />
+        </Layout>
     );
 }
+
+export const getStaticProps = async () => {
+    const posts = await getAllPosts();
+
+    return {
+        props: { posts },
+    };
+};
+
+export default Home;
