@@ -8,7 +8,6 @@ const Metadata = () => (
             {BLOG_TITLE} | {BLOG_DESCRIPTION}
         </title>
         <link rel="icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="/css/global.css" />
         <link rel="preload" href="/fonts/Phenomena/Phenomena-Bold.woff2" as="font" crossOrigin="" />
     </Head>
 );
