@@ -26,8 +26,18 @@
     font-display: swap;
 }
 
-@screen sm {
+/*
+ * make grid item span the whole available width
+ * when it is the only one on the line
+ */
+@screen md {
     .grid *:last-child:nth-child(2n - 1) {
         grid-column: span 2;
+    }
+}
+
+@screen xl {
+    .grid *:last-child:nth-child(2n - 1) {
+        grid-column: auto;
     }
 }

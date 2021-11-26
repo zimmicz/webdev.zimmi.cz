@@ -25,7 +25,7 @@ const Post = ({ code, frontmatter, readingTime, slug }: Props) => {
         <motion.section
             initial="rest"
             whileHover="hover"
-            className="group transition-colors border-4 rounded-lg bg-st-patricks-blue text-gray-300 p-4 sm:p-10 leading-10 sm:leading-10 sm:text-base border-transparent flex flex-col gap-6 lg:gap-8 hover:shadow-sm"
+            className="group transition-colors rounded-lg bg-st-patricks-blue text-gray-300 p-4 sm:p-10 leading-10 sm:leading-10 sm:text-base border-transparent flex flex-col gap-6 lg:gap-8 hover:shadow-sm"
         >
             <Typography.H1>
                 <Link href={`/posts/${slug}`}>
