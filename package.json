@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@tailwindcss/aspect-ratio": "^0.3.0",
     "esbuild": "^0.13.13",
     "framer-motion": "^5.0.0",
     "mdx-bundler": "^7.0.0",

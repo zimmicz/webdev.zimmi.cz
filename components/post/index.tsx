@@ -3,10 +3,13 @@ import type { ReadTimeResults } from 'reading-time';
 import { getMDXComponent } from 'mdx-bundler/client';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { Typography, WrittenAt } from '..';
+import { BannerImage } from '../banner-image';
 
 type Props = {
     code: string;
     frontmatter: {
+        publishedAt: string;
         tags: Array<string>;
         title: string;
     };
@@ -16,37 +19,21 @@ type Props = {
 
 const Post = ({ code, frontmatter, readingTime, slug }: Props) => {
     const Component = React.useMemo(() => getMDXComponent(code), [code]);
-    const { title, tags = [] } = frontmatter;
+    const { publishedAt, title, tags } = frontmatter;
 
     return (
         <motion.section
             initial="rest"
             whileHover="hover"
-            className="group transition-colors hover:border-lavender border-4 rounded-lg bg-st-patricks-blue text-gray-300 p-4 sm:p-10 leading-10 sm:leading-10 sm:text-base border-transparent flex flex-col gap-6 lg:gap-8 "
+            className="group transition-colors border-4 rounded-lg bg-st-patricks-blue text-gray-300 p-4 sm:p-10 leading-10 sm:leading-10 sm:text-base border-transparent flex flex-col gap-6 lg:gap-8 hover:shadow-sm"
         >
-            <h1 className="text-3xl lg:text-5xl font-title font-bold text-lavender">
+            <Typography.H1>
                 <Link href={`/posts/${slug}`}>
                     <a className="hover:border-b hover:border-lavender">{title}</a>
                 </Link>
-            </h1>
+            </Typography.H1>
             <div className="flex flex-wrap justify-between text-base gap-2">
-                <small className="flex gap-2">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 hidden sm:inline-block"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                    </svg>
-                    <span className="self-center">2021/10/28</span>
-                </small>
+                <WrittenAt date={publishedAt} />
                 <ul className="flex space-x-4">
                     {tags.map((tag) => (
                         <li key={tag}>
@@ -61,8 +48,22 @@ const Post = ({ code, frontmatter, readingTime, slug }: Props) => {
                     ))}
                 </ul>
             </div>
-
-            <Component />
+            {frontmatter.imageUrl ? (
+                <BannerImage
+                    className="transition group-hover:scale-100"
+                    src={frontmatter.imageUrl}
+                    aspectRatio={frontmatter.imageAspectRatio}
+                />
+            ) : null}
+            <Component
+                components={{
+                    h2: Typography.H2,
+                    h3: Typography.H3,
+                    h4: Typography.H4,
+                    h5: Typography.H5,
+                    h6: Typography.H6,
+                }}
+            />
 
             <Link href={`/posts/${slug}`} passHref>
                 <motion.a className="flex items-center h-1 mb-2 sm:mb-0">
