@@ -9,7 +9,7 @@ module.exports = {
                 shine: 'shine 3s linear infinite',
             },
             backgroundImage: {
-                'head-gradient': 'radial-gradient(circle, white, hsla(252, 40%, 29%, .4))',
+                'head-gradient': 'radial-gradient(circle, white, hsla(252, 40%, 29%, .1))',
             },
             backgroundSize: {
                 '200%': '200%',
