@@ -9,8 +9,9 @@ import { BannerImage } from '../banner-image';
 type Props = {
     code: string;
     frontmatter: {
-        imageUrl?: string;
-        imageAspectRatio?: string;
+        imageUrl: string;
+        imageAspectRatio: string;
+        imageCredit: string;
         publishedAt: string;
         tags: Array<string>;
         title: string;
@@ -53,6 +54,7 @@ const Post = ({ code, frontmatter, readingTime, slug }: Props) => {
             {frontmatter.imageUrl && frontmatter.imageAspectRatio ? (
                 <BannerImage
                     className="transition group-hover:scale-100"
+                    credit={frontmatter.imageCredit}
                     src={frontmatter.imageUrl}
                     aspectRatio={frontmatter.imageAspectRatio}
                 />
