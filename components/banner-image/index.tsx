@@ -1,17 +1,7 @@
 import React from 'react';
 import { useIntersectionObserver } from '../../hooks/use-intersection-observer';
 
-const BannerImage = ({
-    credit,
-    src,
-    aspectRatio,
-    className,
-}: {
-    credit: string;
-    src: string;
-    aspectRatio: string;
-    className?: string;
-}) => {
+const BannerImage = ({ credit, src, aspectRatio }: { credit: string; src: string; aspectRatio: string }) => {
     const [needsPlaceholder, setNeedsPlaceholder] = React.useState(true);
     const [width, height] = aspectRatio.split(':');
     const onIntersection = () => {
@@ -33,7 +23,7 @@ const BannerImage = ({
 
     return (
         <div
-            className={`aspect-w-${width} aspect-h-${height} scale-95 mx-auto ${className} ${
+            className={`transition group-hover:scale-100 aspect-w-${width} aspect-h-${height} scale-95 mx-auto ${
                 needsPlaceholder ? 'w-full h-full' : undefined
             }`}
         >
@@ -49,9 +39,9 @@ const BannerImage = ({
                     data-src={src}
                 />
                 {needsPlaceholder ? null : (
-                    <small className="text-st-patricks-blue text-center rounded-b-md bg-white bg-opacity-30 w-full absolute bottom-0">
-                        {credit}
-                    </small>
+                    <figcaption className="text-st-patricks-blue text-center rounded-b-md bg-white bg-opacity-30 w-full absolute bottom-0">
+                        <small>{credit}</small>
+                    </figcaption>
                 )}
             </figure>
         </div>

@@ -51,9 +51,8 @@ const Post = ({ code, frontmatter, readingTime, slug }: Props) => {
                     ))}
                 </ul>
             </div>
-            {frontmatter.imageUrl && frontmatter.imageAspectRatio ? (
+            {frontmatter.imageUrl && frontmatter.imageAspectRatio && frontmatter.imageCredit ? (
                 <BannerImage
-                    className="transition group-hover:scale-100"
                     credit={frontmatter.imageCredit}
                     src={frontmatter.imageUrl}
                     aspectRatio={frontmatter.imageAspectRatio}
