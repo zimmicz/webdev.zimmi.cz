@@ -13,6 +13,8 @@ module.exports = {
             },
             backgroundSize: {
                 '200%': '200%',
+                'full-2': '100% 2px',
+                '0-2': '0 2px',
             },
             keyframes: {
                 shine: {
@@ -40,10 +42,6 @@ module.exports = {
             },
             fontFamily: {
                 title: ['Phenomena'],
-            },
-            backgroundSize: {
-                'full-2': '100% 2px',
-                '0-2': '0 2px',
             },
         },
     },
