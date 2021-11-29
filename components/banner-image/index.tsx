@@ -22,8 +22,10 @@ const BannerImage = ({ src, aspectRatio, className }: { src: string; aspectRatio
     const ref = useIntersectionObserver<HTMLImageElement>(onIntersection);
 
     return (
-        <div className={`aspect-w-${width} aspect-h-${height} scale-95 mx-auto ${className}`}>
-            {needsPlaceholder ? <div className="animate-pulse bg-lavender opacity-5 rounded-md shadow-lg" /> : null}
+        <div className={`aspect-w-${width} w-full h-full aspect-h-${height} scale-95 mx-auto ${className}`}>
+            {needsPlaceholder ? (
+                <div className="w-full h-full animate-pulse bg-lavender opacity-5 rounded-md shadow-lg" />
+            ) : null}
             <img
                 onLoad={() => setNeedsPlaceholder(false)}
                 ref={ref}
