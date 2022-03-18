@@ -1,26 +1,12 @@
 import React from 'react';
-import type { ReadTimeResults } from 'reading-time';
 import { getMDXComponent } from 'mdx-bundler/client';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { PostCtaLink, Typography, WrittenAt } from '..';
 import { BannerImage } from '../banner-image';
 
-type Props = {
-    code: string;
-    frontmatter: {
-        imageUrl: string;
-        imageAspectRatio: string;
-        imageCredit: string;
-        publishedAt: string;
-        tags: Array<string>;
-        title: string;
-    };
-    readingTime: ReadTimeResults;
-    slug: string;
-};
-
-const Post = ({ code, frontmatter, readingTime, slug }: Props) => {
+const Post = ({ code, frontmatter, readingTime, slug }: Post) => {
+    console.log(frontmatter);
     const Component = React.useMemo(() => getMDXComponent(code), [code]);
     const { publishedAt, title, tags } = frontmatter;
 
@@ -32,7 +18,7 @@ const Post = ({ code, frontmatter, readingTime, slug }: Props) => {
         >
             <Typography.H1>
                 <Link href={`/posts/${slug}`}>
-                    <a className="hover:border-b hover:border-lavender">{title}</a>
+                    <a className="text-decoration-fade from-lavender to-lavender pb-2">{title}</a>
                 </Link>
             </Typography.H1>
             <div className="flex flex-wrap justify-between text-base gap-2">
@@ -41,21 +27,21 @@ const Post = ({ code, frontmatter, readingTime, slug }: Props) => {
                     {tags.map((tag) => (
                         <li key={tag}>
                             <Link href="/tags/react">
-                                <a>
-                                    <small className="border-lavender border md:border-2 py-1 px-4 rounded-lg bg-st-patricks-blue hover:bg-lavender transition-colors">
-                                        {tag}
-                                    </small>
+                                <a className="border-lavender border py-1 px-4 rounded-lg from-lavender to-lavender tag-decoration-fade">
+                                    <small>{tag}</small>
                                 </a>
                             </Link>
                         </li>
                     ))}
                 </ul>
             </div>
-            {frontmatter.imageUrl && frontmatter.imageAspectRatio && frontmatter.imageCredit ? (
+            {frontmatter.image ? (
                 <BannerImage
-                    credit={frontmatter.imageCredit}
-                    src={frontmatter.imageUrl}
-                    aspectRatio={frontmatter.imageAspectRatio}
+                    credit={frontmatter.image.credit}
+                    url={frontmatter.image.url}
+                    aspectRatio={frontmatter.image.aspectRatio}
+                    width={frontmatter.image.width}
+                    height={frontmatter.image.height}
                 />
             ) : null}
             <Component

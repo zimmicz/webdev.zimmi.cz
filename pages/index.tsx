@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, HeroPost, Layout, Newsletter, Post } from '../components';
 import { getAllPosts } from '../lib/utils';
 
-function Home({ posts }: { posts: ReturnType<typeof getAllPosts> }) {
+function Home({ posts }: { posts: PromiseReturnType<ReturnType<typeof getAllPosts>> }) {
     return (
         <Layout>
             <Grid>

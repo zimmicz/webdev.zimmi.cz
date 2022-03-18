@@ -41,3 +41,11 @@
         grid-column: auto;
     }
 }
+
+a.text-decoration-fade {
+    @apply transition-colors transition-bg bg-gradient-to-r duration-300 bg-no-repeat bg-left-bottom bg-0-2 hover:bg-full-2;
+}
+
+a.tag-decoration-fade {
+    @apply transition-all bg-gradient-to-r duration-300 bg-no-repeat bg-left bg-0-full hover:bg-full;
+}

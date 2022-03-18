@@ -1,9 +1,10 @@
 import React from 'react';
 import { useIntersectionObserver } from '../../hooks/use-intersection-observer';
 
-const BannerImage = ({ credit, src, aspectRatio }: { credit: string; src: string; aspectRatio: string }) => {
+const BannerImage = ({ credit, aspectRatio, url, ...props }: Defined<Post['frontmatter']['image']>) => {
     const [needsPlaceholder, setNeedsPlaceholder] = React.useState(true);
     const [width, height] = aspectRatio.split(':');
+
     const onIntersection = () => {
         const element = ref.current;
 
@@ -22,21 +23,15 @@ const BannerImage = ({ credit, src, aspectRatio }: { credit: string; src: string
     const ref = useIntersectionObserver<HTMLImageElement>(onIntersection);
 
     return (
-        <div
-            className={`transition group-hover:scale-100 aspect-w-${width} aspect-h-${height} scale-95 mx-auto ${
-                needsPlaceholder ? 'w-full h-full' : undefined
-            }`}
-        >
-            {needsPlaceholder ? (
-                <div className="w-full h-full animate-pulse bg-lavender opacity-5 rounded-md shadow-lg" />
-            ) : null}
-            <figure>
+        <div className={`transition group-hover:scale-100 aspect-[${width}/${height}] scale-95`}>
+            <figure className={`${needsPlaceholder ? 'animate-pulse bg-lavender opacity-5 rounded-md shadow-lg' : ''}`}>
                 <img
+                    {...props}
                     onLoad={() => setNeedsPlaceholder(false)}
                     ref={ref}
-                    className="shadow-lg rounded-md"
+                    className="shadow-lg rounded-md mx-auto"
                     decoding="async"
-                    data-src={src}
+                    data-src={url}
                 />
                 {needsPlaceholder ? null : (
                     <figcaption className="text-st-patricks-blue text-center rounded-b-md bg-white bg-opacity-30 w-full absolute bottom-0">

@@ -1,7 +1,11 @@
 import React from 'react';
 
 const H1 = ({ children }: React.PropsWithChildren<unknown>) => {
-    return <h1 className="text-3xl lg:text-5xl font-title font-bold text-lavender">{children}</h1>;
+    return (
+        <h1 className="text-3xl lg:text-5xl font-title font-bold text-lavender leading-snug lg:leading-snug">
+            {children}
+        </h1>
+    );
 };
 
 const H2 = ({ children }: React.PropsWithChildren<unknown>) => {

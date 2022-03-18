@@ -1,10 +1,13 @@
 ---
-title: Post with cool component
+title: Second post
 publishedAt: "2021-11-14"
 tags: [react]
-imageUrl: https://unsplash.com/photos/xL66l--msXU/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8MTN8fG91dGRvb3J8fDB8fHx8MTYzNzQ4NTMwMA&force=true
-imageCredit: Michal Zimmermann
-imageAspectRatio: "16:9"
+image:
+    url: https://unsplash.com/photos/xL66l--msXU/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8MTN8fG91dGRvb3J8fDB8fHx8MTYzNzQ4NTMwMA&force=true
+    credit: Michal Zimmermann
+    aspectRatio: "4:3"
+    width: 3264
+    height: 2448
 ---
 
 import Cool from "../../components/demo"
@@ -17,3 +20,15 @@ Now I will render a cool component from the same folder.
 ## Hello h2
 I'm also using custom Link Component
 Go back [home](/).
+
+## Code block
+
+```js
+const getStaticProps = async ({ params }) => {
+    const post = await getSinglePost(params.slug);
+    console.log('post', post);
+    return {
+        props: { ...post },
+    };
+};
+```

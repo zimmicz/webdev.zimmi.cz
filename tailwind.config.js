@@ -8,12 +8,17 @@ module.exports = {
                 arabela: 'arabela 500ms ease-in-out forwards',
                 shine: 'shine 3s linear infinite',
             },
+            aspectRatio: {
+                '4/3': '4 / 3',
+            },
             backgroundImage: {
                 'head-gradient': 'radial-gradient(circle, white, hsla(252, 40%, 29%, .1))',
             },
             backgroundSize: {
                 '200%': '200%',
+                full: '100% 100%',
                 'full-2': '100% 2px',
+                '0-full': '0px 100%',
                 '0-2': '0 2px',
             },
             keyframes: {
@@ -43,10 +48,12 @@ module.exports = {
             fontFamily: {
                 title: ['Phenomena'],
             },
+            transitionProperty: {
+                bg: 'background-position, background-size',
+            },
         },
     },
     variants: {
         extend: {},
     },
-    plugins: [require('@tailwindcss/aspect-ratio')],
 };

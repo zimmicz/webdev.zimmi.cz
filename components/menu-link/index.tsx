@@ -1,17 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 type LinkProps = Pick<React.ComponentProps<typeof Link>, 'href' | 'children'> & { onClick: React.MouseEventHandler };
 
 const MenuLink = ({ onClick, href, children, className }: { className?: string } & Partial<LinkProps>) => {
     return (
-        <a
+        <motion.a
+            animate={{ x: 0 }}
+            initial={{ x: 50 }}
             onClick={onClick}
             href={href?.toString()}
-            className={`${className} pb-2 transition-all bg-gradient-to-r from-white to-white duration-300 bg-no-repeat bg-left-bottom bg-0-2 hover:bg-full-2`}
+            className={`${className} pb-2 text-decoration-fade from-white to-white`}
         >
             {children}
-        </a>
+        </motion.a>
     );
 };
 
