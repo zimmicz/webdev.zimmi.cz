@@ -2,7 +2,7 @@ import React from 'react';
 import { getMDXComponent } from 'mdx-bundler/client';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { PostCtaLink, Typography, WrittenAt } from '..';
+import { Typography, WrittenAt } from '..';
 import { BannerImage } from '../banner-image';
 
 const Post = ({ code, frontmatter, readingTime, slug }: Post) => {
@@ -13,11 +13,11 @@ const Post = ({ code, frontmatter, readingTime, slug }: Post) => {
     <motion.section
       initial="rest"
       whileHover="hover"
-      className="group transition-colors rounded-lg text-gray-300 p-4 sm:p-10 leading-10 sm:leading-10 sm:text-base border-transparent flex flex-col gap-6 lg:gap-8 hover:shadow-sm"
+      className="group transition-colors rounded-lg p-4 sm:p-10 leading-10 sm:leading-10 sm:text-base border-transparent flex flex-col gap-6 lg:gap-8 hover:shadow-sm bg-white my-10"
     >
       <Typography.H1>
         <Link href={`/posts/${slug}`}>
-          <a className="text-decoration-fade from-lavender to-lavender pb-2">{title}</a>
+          <a className="text-decoration-fade from-primary to-primary hover:text-primary pb-2">{title}</a>
         </Link>
       </Typography.H1>
       <div className="flex flex-wrap justify-between text-base gap-2">
@@ -26,7 +26,7 @@ const Post = ({ code, frontmatter, readingTime, slug }: Post) => {
           {tags.map((tag) => (
             <li key={tag}>
               <Link href="/tags/react">
-                <a className="border-lavender border py-1 px-4 rounded-lg from-lavender to-lavender tag-decoration-fade">
+                <a className="border-primary border py-1 px-4 rounded-lg from-primary to-primary tag-decoration-fade">
                   <small>{tag}</small>
                 </a>
               </Link>
@@ -52,8 +52,6 @@ const Post = ({ code, frontmatter, readingTime, slug }: Post) => {
           h6: Typography.H6,
         }}
       />
-
-      <PostCtaLink slug={slug} readingTime={readingTime} />
     </motion.section>
   );
 };

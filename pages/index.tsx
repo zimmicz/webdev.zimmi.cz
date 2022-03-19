@@ -1,37 +1,28 @@
 import React from 'react';
-import { Grid, HeroPost, Layout, Newsletter, Post } from '../components';
+import { Layout, Newsletter, Post } from '../components';
+import { Background } from '../components/background';
 import { getAllPosts } from '../lib/utils';
 
 function Home({ posts }: { posts: PromiseReturnType<ReturnType<typeof getAllPosts>> }) {
-    return (
-        <Layout>
-            <Grid>
-                {posts.map((post, index) => (
-                    <Post key={index} {...post} />
-                ))}
-            </Grid>
-
-            <HeroPost {...posts[0]} />
-
-            <Grid>
-                {posts.map((post, index) => (
-                    <Post key={index} {...post} />
-                ))}
-            </Grid>
-
-            <HeroPost {...posts[0]} />
-
-            <Newsletter />
-        </Layout>
-    );
+  return (
+    <Background>
+      <Layout>
+        {posts.map((post, index) => (
+          <Post key={index} {...post} />
+        ))}
+        <Newsletter />
+      </Layout>
+    </Background>
+  );
 }
 
-export const getStaticProps = async () => {
-    const posts = await getAllPosts();
+const getStaticProps = async () => {
+  const posts = await getAllPosts();
 
-    return {
-        props: { posts },
-    };
+  return {
+    props: { posts },
+  };
 };
 
 export default Home;
+export { getStaticProps };

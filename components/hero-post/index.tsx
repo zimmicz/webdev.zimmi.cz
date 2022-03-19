@@ -29,9 +29,9 @@ const HeroPost = ({ frontmatter, ...props }: Props) => {
     <article className="group p-20 w-full bg-gray-100 text-st-patricks-blue leading-10 gap-8 flex flex-wrap">
       <div className="max-w-screen-xl mx-auto">
         <div className="flex flex-wrap xl:flex-nowrap lg:justify-left lg:items-center gap-8">
-          <h1 className="text-3xl w-2/3 flex-shrink-0 lg:text-7xl font-title font-bold text-lavender">
+          <h1 className="text-3xl w-2/3 flex-shrink-0 lg:text-7xl font-title font-bold text-primary">
             <Link href="/">
-              <a className="text-decoration-fade from-lavender to-lavender py-1">{frontmatter.title}</a>
+              <a className="text-decoration-fade from-primary to-lavender py-1">{frontmatter.title}</a>
             </Link>
           </h1>
           {frontmatter.image ? (
