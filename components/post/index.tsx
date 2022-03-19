@@ -6,7 +6,6 @@ import { PostCtaLink, Typography, WrittenAt } from '..';
 import { BannerImage } from '../banner-image';
 
 const Post = ({ code, frontmatter, readingTime, slug }: Post) => {
-    console.log(frontmatter);
     const Component = React.useMemo(() => getMDXComponent(code), [code]);
     const { publishedAt, title, tags } = frontmatter;
 

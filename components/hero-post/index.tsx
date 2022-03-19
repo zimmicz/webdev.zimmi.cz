@@ -23,7 +23,6 @@ type Props = {
 };
 
 const HeroPost = ({ frontmatter, ...props }: Props) => {
-    console.log(props);
     const Component = React.useMemo(() => getMDXComponent(props.code), [props.code]);
 
     return (

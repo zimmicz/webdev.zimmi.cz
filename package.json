@@ -10,6 +10,7 @@
     "@tailwindcss/aspect-ratio": "^0.3.0",
     "esbuild": "^0.13.13",
     "framer-motion": "^5.0.0",
+    "globby": "^13.1.1",
     "mdx-bundler": "^7.0.0",
     "next": "latest",
     "react": "^17.0.2",
