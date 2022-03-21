@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       animation: {
         arabela: 'arabela 500ms ease-in-out forwards',
+        loading: 'loading 1000ms infinite linear',
       },
       aspectRatio: {
         '4/3': '4 / 3',
@@ -33,6 +34,20 @@ module.exports = {
           to: {
             'margin-left': 'auto',
             transform: 'scale(1)',
+          },
+        },
+        loading: {
+          '20%': {
+            backgroundSize: '5px 60% ,5px 100%,5px 100%',
+          },
+          '40%': {
+            backgroundSize: '5px 80% ,5px 60% ,5px 100%',
+          },
+          '60%': {
+            backgroundSize: '5px 100%,5px 80% ,5px 60%',
+          },
+          '80%': {
+            backgroundSize: '5px 100%,5px 100%,5px 80%',
           },
         },
       },

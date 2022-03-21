@@ -5,7 +5,7 @@ import { MenuLink } from '..';
 import { BLOG_TITLE, BLOG_DESCRIPTION } from '../../config';
 
 const Header = () => (
-  <header className="py-5 md:py-10 font-title font-bold px-5 xl:px-20 flex-wrap max-w-screen-xl flex-col md:flex-row md:flex-nowrap w-full flex space-y-5 md:space-y-10 md:space-y-0 justify-center items-center">
+  <header className="p-5 md:py-10 font-title font-bold flex-wrap max-w-screen-xl flex-col md:flex-row md:flex-nowrap w-full flex space-y-5 md:space-y-10 md:space-y-0 justify-center items-center">
     <motion.div animate={{ x: 0 }} initial={{ x: -50 }} className="text-center md:text-left">
       <Link href="/">
         <a>
