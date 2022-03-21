@@ -26,14 +26,26 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Fredoka';
+    src: url('/fonts/Fredoka/static/Fredoka/Fredoka-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
 html {
-    @apply bg-gray-100;
+    @apply bg-gray-100 text-gray-800 font-text;
 }
 
 a.text-decoration-fade {
     @apply transition-colors transition-bg bg-gradient-to-r duration-300 bg-no-repeat bg-left-bottom bg-0-2 hover:bg-full-2;
 }
 
-a.tag-decoration-fade {
-    @apply transition-all bg-gradient-to-r duration-300 bg-no-repeat bg-left bg-0-full hover:bg-full;
+svg.my-icon {
+    @apply stroke-subtle;
+}
+
+svg.my-icon-primary {
+    @apply stroke-primary;
 }

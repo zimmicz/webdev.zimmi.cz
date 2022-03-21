@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Typography, WrittenAt } from '..';
 import { BannerImage } from '../banner-image';
+import { ReadingTime } from '../reading-time';
+import { withAnchor } from '../../hoc/anchor';
 
 const Post = ({ code, frontmatter, readingTime, slug }: Post) => {
   const Component = React.useMemo(() => getMDXComponent(code), [code]);
@@ -13,45 +15,41 @@ const Post = ({ code, frontmatter, readingTime, slug }: Post) => {
     <motion.section
       initial="rest"
       whileHover="hover"
-      className="group transition-colors rounded-lg p-4 sm:p-10 leading-10 sm:leading-10 sm:text-base border-transparent flex flex-col gap-6 lg:gap-8 hover:shadow-sm bg-white my-10"
+      className="transition-colors rounded-lg p-4 sm:p-10 leading-10 sm:leading-10 sm:text-base border-transparent hover:shadow-sm bg-white my-10"
     >
-      <Typography.H1>
+      <Typography.H1 className="mb-5">
         <Link href={`/posts/${slug}`}>
           <a className="text-decoration-fade from-primary to-primary hover:text-primary pb-2">{title}</a>
         </Link>
       </Typography.H1>
-      <div className="flex flex-wrap justify-between text-base gap-2">
+      <div className="text-gray-500 flex flex-wrap justify-between text-base gap-2">
         <WrittenAt date={publishedAt} />
-        <ul className="flex space-x-4">
+        <ReadingTime readingTime={readingTime} />
+        <ul className="flex space-x-6">
           {tags.map((tag) => (
             <li key={tag}>
               <Link href="/tags/react">
-                <a className="border-primary border py-1 px-4 rounded-lg from-primary to-primary tag-decoration-fade">
-                  <small>{tag}</small>
+                <a className="bg-white text-primary pb-2 font-title font-bold text-lg text-decoration-fade from-primary to-primary">
+                  {tag}
                 </a>
               </Link>
             </li>
           ))}
         </ul>
       </div>
-      {frontmatter.image ? (
-        <BannerImage
-          credit={frontmatter.image.credit}
-          url={frontmatter.image.url}
-          aspectRatio={frontmatter.image.aspectRatio}
-          width={frontmatter.image.width}
-          height={frontmatter.image.height}
+      {frontmatter.image ? <BannerImage {...frontmatter.image} /> : null}
+      <div>
+        <Component
+          components={{
+            h2: withAnchor(Typography.H2),
+            h3: withAnchor(Typography.H3),
+            h4: withAnchor(Typography.H4),
+            h5: withAnchor(Typography.H5),
+            h6: withAnchor(Typography.H6),
+            p: Typography.Paragraph,
+          }}
         />
-      ) : null}
-      <Component
-        components={{
-          h2: Typography.H2,
-          h3: Typography.H3,
-          h4: Typography.H4,
-          h5: Typography.H5,
-          h6: Typography.H6,
-        }}
-      />
+      </div>
     </motion.section>
   );
 };

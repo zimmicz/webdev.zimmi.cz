@@ -23,7 +23,7 @@ const BannerImage = ({ credit, aspectRatio, url, ...props }: Defined<Post['front
   const ref = useIntersectionObserver<HTMLImageElement>(onIntersection);
 
   return (
-    <div className={`transition aspect-[${width}/${height}] scale-95`}>
+    <div className={`aspect-[${width}/${height}] scale-95`}>
       <figure className={`${needsPlaceholder ? 'animate-pulse bg-primary opacity-5 rounded-md shadow-lg' : ''}`}>
         <img
           {...props}
@@ -34,7 +34,7 @@ const BannerImage = ({ credit, aspectRatio, url, ...props }: Defined<Post['front
           data-src={url}
         />
         {needsPlaceholder ? null : (
-          <figcaption className="text-right pr-5 rounded-b-md bg-white bg-opacity-30 w-full absolute bottom-0">
+          <figcaption className="text-center pr-5 rounded-b-md bg-white bg-opacity-30 w-full absolute bottom-0">
             <small>{credit}</small>
           </figcaption>
         )}

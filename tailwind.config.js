@@ -1,6 +1,8 @@
+const { colors } = require('tailwindcss/defaultTheme');
+
 module.exports = {
   mode: 'jit',
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}', './hoc/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -35,12 +37,19 @@ module.exports = {
         },
       },
       colors: {
-        cornsilk: '#fffade',
         primary: '#EC0868',
-        'st-patricks-blue': 'hsla(252, 40%, 29%, 1)',
+        subtle: colors.gray['400'],
       },
       fontFamily: {
         title: ['Phenomena'],
+        text: ['Fredoka'],
+      },
+      fontSize: {
+        lg: ['1.125rem', '2.8rem'],
+      },
+      stroke: {
+        primary: '#EC0868',
+        subtle: colors.gray['400'],
       },
       transitionProperty: {
         bg: 'background-position, background-size',
@@ -48,6 +57,8 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      visibility: ['hover'],
+    },
   },
 };

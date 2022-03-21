@@ -1,8 +1,8 @@
 ---
 title: First post
 publishedAt: "2021-11-14"
-tags: [react]
-image:
+tags: [react, typescript, hooks]
+bad-image:
     url: https://unsplash.com/photos/n_qeUPl4QCM/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8MXx8OSUzQTE2fHwwfHx8fDE2Mzc0ODU2Nzc&force=true
     credit: Michal Zimmermann
     aspectRatio: "9:16"
@@ -10,12 +10,27 @@ image:
     width: 2592
 ---
 
-This is my first post. There's another one [here](/posts/second-post).
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean varius interdum purus nec laoreet. Nullam efficitur felis ut nisl placerat, sed egestas quam tincidunt. Phasellus eu eros vitae sapien rhoncus aliquet vel vel ex. Praesent vitae urna venenatis, vestibulum risus vel, condimentum turpis. Morbi maximus imperdiet est at ultrices. Vivamus iaculis justo sed nulla pellentesque vestibulum. Aliquam id hendrerit sem. Integer ut velit felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur blandit sit amet tellus id pulvinar. Curabitur eros lectus, laoreet et metus vitae, euismod mattis dui. Quisque vitae fringilla magna. Pellentesque ac odio sed augue porta vulputate.
 
-This is my first post. There's another one [here](/posts/second-post).
+## Hello h2
+I'm also using custom Link Component
+Go back [home](/).
 
-This is my first post. There's another one [here](/posts/second-post).
+## Code block
 
-This is my first post. There's another one [here](/posts/second-post).
+```js
+const getStaticProps = async ({ params }) => {
+    const post = await getSinglePost(params.slug);
+    console.log('post', post);
+    return {
+        props: { ...post },
+    };
+};
+```
+Aenean accumsan laoreet turpis, ut aliquet tellus porttitor vitae. Nulla ut ipsum semper, tristique mi posuere, ornare magna. Curabitur luctus eros nec elementum tincidunt. Integer eu ornare quam. Morbi vitae nunc nec odio ultrices blandit vitae eu nisl. Integer in molestie nisl, vitae lobortis nulla. Nam sed cursus mauris, vel molestie sapien. Mauris molestie finibus purus a tincidunt. Etiam sollicitudin et arcu ut egestas.
 
-This is my first post. There's another one [here](/posts/second-post).
+Suspendisse lacinia massa ac leo fringilla, in venenatis velit luctus. Mauris laoreet scelerisque facilisis. Duis pharetra aliquam enim, eget viverra mauris pharetra id. Fusce elementum risus id lacus scelerisque, placerat porta dui vestibulum. In eu justo enim. Donec vitae ex dolor. Vestibulum vulputate, mi id tempus ultrices, velit lacus consectetur orci, non luctus nisl massa vitae urna. Etiam cursus erat neque, eu venenatis purus efficitur vitae. Nunc quis justo sollicitudin tortor viverra ullamcorper sit amet a ligula. Vivamus sagittis facilisis quam, nec aliquam tortor. Aliquam erat volutpat. Nulla nec ornare velit. Nullam at tincidunt ipsum. Aliquam faucibus nunc et enim placerat blandit. Mauris et mollis ex. Pellentesque in sapien venenatis, varius ante eget, euismod velit.
+
+Nunc non nulla orci. Praesent venenatis vestibulum mi at pulvinar. Aliquam nec gravida ante, ut malesuada quam. Nunc et augue in lectus lacinia suscipit sed vel risus. Nulla eleifend massa lectus, vehicula euismod leo maximus nec. Cras eget justo porta, ultrices sem a, sollicitudin ligula. Vestibulum tempus laoreet elit, at condimentum odio pretium vestibulum. Vestibulum commodo auctor vulputate. Fusce ornare tempor magna, id maximus felis egestas at. Fusce pellentesque, nisl eget dictum aliquet, nunc urna maximus metus, ac tempus sem velit at enim. Sed porttitor tempor elit, et sollicitudin tortor condimentum ut.
+
+Cras eget odio at sapien pellentesque dictum. Nulla ac est sed metus pretium malesuada. Cras hendrerit mattis tellus sed lacinia. Cras blandit viverra ex, in facilisis lorem suscipit ac. Sed in ligula quis eros convallis tristique vitae sed risus. Pellentesque aliquam metus nec odio feugiat gravida. Aliquam molestie ante sit amet iaculis commodo. Cras varius leo sed dui volutpat vulputate. Curabitur porta fringilla dolor, commodo porta nulla convallis a. Proin tincidunt accumsan quam vitae commodo. Nullam dignissim, eros et fermentum venenatis, tellus turpis posuere sem, vel imperdiet purus leo rutrum mi.

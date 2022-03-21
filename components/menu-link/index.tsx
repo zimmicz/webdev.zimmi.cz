@@ -11,7 +11,7 @@ const MenuLink = ({ onClick, href, children, className }: { className?: string }
       initial={{ x: 50 }}
       onClick={onClick}
       href={href?.toString()}
-      className={`${className} pb-2 text-decoration-fade from-black to-black`}
+      className={`${className} pb-2 text-primary text-decoration-fade from-primary to-primary`}
     >
       {children}
     </motion.a>
