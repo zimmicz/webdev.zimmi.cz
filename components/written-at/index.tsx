@@ -6,7 +6,7 @@ const WrittenAt = ({ date: dateString }: { date: string }) => {
   const formatted = new Intl.DateTimeFormat('en-us').format(date);
 
   return (
-    <small className="flex items-center gap-2 text-subtle">
+    <small title="Written at" className="flex items-center gap-2 text-subtle">
       <Clock height={24} width={24} className="my-icon" />
       <span className="self-center">{formatted}</span>
     </small>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { withAnchor } from '../../hoc/anchor';
 
 const common = {
   heading: 'font-title font-bold text-3xl lg:text-5xl',
@@ -30,7 +29,15 @@ const H6 = ({ children }: React.PropsWithChildren<unknown>) => {
 };
 
 const Paragraph = ({ children }: React.PropsWithChildren<unknown>) => {
-  return <p className="my-5 font-text sm:text-lg">{children}</p>;
+  return <p className="my-5 sm:text-lg">{children}</p>;
 };
 
-export { H1, H2, H3, H4, H5, H6, Paragraph };
+const Ul = ({ children }: React.PropsWithChildren<unknown>) => {
+  return <ul className="list-disc list-inside my-5 sm:text-lg">{children}</ul>;
+};
+
+const Ol = ({ children }: React.PropsWithChildren<unknown>) => {
+  return <ol className="list-decimal list-inside my-5 sm:text-lg">{children}</ol>;
+};
+
+export { H1, H2, H3, H4, H5, H6, Paragraph, Ul, Ol };

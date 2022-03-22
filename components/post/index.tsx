@@ -47,6 +47,8 @@ const Post = ({ code, frontmatter, readingTime, slug }: Post) => {
             h5: withAnchor(Typography.H5),
             h6: withAnchor(Typography.H6),
             p: Typography.Paragraph,
+            ol: Typography.Ol,
+            ul: Typography.Ul,
           }}
         />
       </div>

@@ -49,3 +49,21 @@ svg.my-icon {
 svg.my-icon-primary {
     @apply stroke-primary;
 }
+
+@layer components {
+    .sidenote {
+        @apply text-sidenote block border-l-4 px-4 py-2 my-8 relative;
+    }
+}
+
+my-sidenote-info {
+    @apply sidenote text-info-700 border-info bg-info-200 rounded-r-md;
+}
+
+my-sidenote-warning {
+    @apply sidenote text-warning-700 border-warning bg-warning-200 rounded-r-md;
+}
+
+my-sidenote-success {
+    @apply sidenote text-success-700 border-success bg-success-200 rounded-r-md;
+}
