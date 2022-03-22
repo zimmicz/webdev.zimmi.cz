@@ -13,7 +13,7 @@ const ReadingTime = ({ readingTime }: Props) => {
     <small className="flex items-center gap-2 text-subtle">
       <AlignLeft height={24} width={24} className="my-icon" />
       <span>
-        reading time: {minutes} {minutes > 1 ? 'minutes' : 'minute'}
+        {minutes} {minutes > 1 ? 'minutes' : 'minute'}
       </span>
     </small>
   );

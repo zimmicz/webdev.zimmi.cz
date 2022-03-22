@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Newsletter, Post } from '../components';
+import { Layout, Post } from '../components';
 import { Background } from '../components/background';
 import { getAllPosts } from '../lib/utils';
 
@@ -10,7 +10,6 @@ function Home({ posts }: { posts: PromiseReturnType<ReturnType<typeof getAllPost
         {posts.map((post, index) => (
           <Post key={index} {...post} />
         ))}
-        <Newsletter />
       </Layout>
     </Background>
   );
