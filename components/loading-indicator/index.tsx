@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useToggle } from '../../hooks';
@@ -17,18 +17,19 @@ const LoadingIndicator = () => {
     };
   }, []);
 
-  if (!isLoading) {
-    return null;
-  }
-
   return (
-    <motion.div
-      initial={{ y: 100 }}
-      animate={{ y: 0 }}
-      className="fixed bottom-14 right-14 px-2 border-gray-300 border-b"
-    >
-      <div style={style} className="animate-loading"></div>
-    </motion.div>
+    <AnimatePresence>
+      {isLoading ? (
+        <motion.div
+          initial={{ y: 100 }}
+          animate={{ y: 0 }}
+          exit={{ scale: 0 }}
+          className="fixed bottom-14 right-14 px-2 border-gray-300 border-b"
+        >
+          <div style={style} className="animate-loading"></div>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   );
 };
 
