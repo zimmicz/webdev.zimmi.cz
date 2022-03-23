@@ -14,7 +14,7 @@ declare global {
         height: number;
       };
       publishedAt: string;
-      tags: Array<string>;
+      categories: Array<string>;
       title: string;
       excerpt: string;
     };

@@ -40,7 +40,7 @@ const Teaser = (props: Post) => (
 const BasePost = ({
   children,
   slug,
-  frontmatter: { publishedAt, tags, title },
+  frontmatter: { publishedAt, categories, title },
   readingTime,
 }: React.PropsWithChildren<Post>) => (
   <motion.section
@@ -57,11 +57,11 @@ const BasePost = ({
       <WrittenAt date={publishedAt} />
       <ReadingTime readingTime={readingTime} />
       <ul className="flex space-x-6">
-        {tags.map((tag) => (
-          <li key={tag}>
-            <Link href="/tags/react">
+        {categories.map((category) => (
+          <li key={category}>
+            <Link href="/categories/react">
               <a className="bg-white text-primary pb-2 font-title font-bold text-lg text-decoration-fade from-primary to-primary">
-                {tag}
+                {category}
               </a>
             </Link>
           </li>

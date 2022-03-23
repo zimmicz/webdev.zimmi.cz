@@ -52,7 +52,19 @@ module.exports = {
         },
       },
       colors: {
-        primary: '#EC0868',
+        primary: {
+          DEFAULT: '#e34a80',
+          50: '#fdfcfb',
+          100: '#fbf0f0',
+          200: '#f8cce1',
+          300: '#ef9ec2',
+          400: '#ee6d9e',
+          500: '#e34a80',
+          600: '#ce305f',
+          700: '#a82445',
+          800: '#7b1a2c',
+          900: '#4c1017',
+        },
         info: {
           DEFAULT: '#7c66ba',
           50: '#f9fafb',
