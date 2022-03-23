@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout, Teaser } from '../components';
 import { Background } from '../components/background';
+import { generateFeed } from '../lib/feed';
 import { getAllPosts } from '../lib/utils';
 
 function Home({ posts }: { posts: PromiseReturnType<ReturnType<typeof getAllPosts>> }) {
@@ -17,6 +18,8 @@ function Home({ posts }: { posts: PromiseReturnType<ReturnType<typeof getAllPost
 
 const getStaticProps = async () => {
   const posts = await getAllPosts();
+
+  generateFeed(posts);
 
   return {
     props: { posts },
