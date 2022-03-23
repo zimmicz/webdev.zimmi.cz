@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Post } from '../components';
+import { Layout, Teaser } from '../components';
 import { Background } from '../components/background';
 import { getAllPosts } from '../lib/utils';
 
@@ -8,7 +8,7 @@ function Home({ posts }: { posts: PromiseReturnType<ReturnType<typeof getAllPost
     <Background>
       <Layout>
         {posts.map((post, index) => (
-          <Post key={index} {...post} />
+          <Teaser key={index} {...post} />
         ))}
       </Layout>
     </Background>

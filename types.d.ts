@@ -16,6 +16,7 @@ declare global {
       publishedAt: string;
       tags: Array<string>;
       title: string;
+      excerpt: string;
     };
     readingTime: ReadTimeResults;
     slug: string;
