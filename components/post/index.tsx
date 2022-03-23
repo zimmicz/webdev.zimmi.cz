@@ -46,7 +46,7 @@ const BasePost = ({
   <motion.section
     initial="rest"
     whileHover="hover"
-    className="rounded-lg p-4 sm:p-10 leading-10 sm:leading-10 sm:text-base hover:shadow-sm bg-white my-10"
+    className="rounded-lg p-4 sm:p-10 leading-10 sm:leading-10 sm:text-base bg-white my-10"
   >
     <Typography.H1 className="mb-5">
       <Link href={`/posts/${slug}`}>

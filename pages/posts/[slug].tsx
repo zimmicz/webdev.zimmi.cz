@@ -1,16 +1,13 @@
 import React from 'react';
 import { getAllPosts, getSinglePost } from '../../lib/utils';
 import { Layout, Post as PostComponent } from '../../components';
-import { Background } from '../../components/background';
 
 type Resolve<T> = T extends Promise<infer Item> ? Item : T;
 
 const Post = (props: Resolve<ReturnType<typeof getSinglePost>>) => (
-  <Background>
-    <Layout>
-      <PostComponent {...props} />
-    </Layout>
-  </Background>
+  <Layout>
+    <PostComponent {...props} />
+  </Layout>
 );
 
 const getStaticProps = async ({ params }) => {
