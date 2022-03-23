@@ -35,7 +35,7 @@
 }
 
 html {
-    @apply bg-gray-100 text-gray-800 font-text;
+    @apply bg-gray-100 text-gray-800 font-text overflow-x-hidden;
 }
 
 a.text-decoration-fade {

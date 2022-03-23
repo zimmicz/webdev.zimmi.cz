@@ -22,9 +22,9 @@ const withAnchor = (WrappedComponent: (props: React.PropsWithChildren<unknown>) 
     return (
       <WrappedComponent {...props}>
         <NextLink href={anchor}>
-          <a id={title} className="flex items-center group">
+          <a id={title} className="flex items-center">
             <span className="flex-grow">{children}</span>
-            <span className="invisible group-hover:visible">
+            <span>
               <Link className="my-icon-primary" />
             </span>
           </a>
