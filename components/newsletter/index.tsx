@@ -6,7 +6,7 @@ const Newsletter = () => {
       <h2 className="text-5xl font-title text-gray-300">Would you like to read more?</h2>
       <div className="my-4 text-gray-300">
         <p>If I got your attention, may I get your e-mail as well?</p>
-        <p>I'll keep it to myself and I'll send you a digest now and then.</p>
+        <p>I&apos;ll keep it to myself and I&apos;ll send you a digest now and then.</p>
       </div>
       <form className="flex flex-wrap justify-between gap-5">
         <input type="email" placeholder="Your e-mail" className="h-16 flex-shrink-0 flex-grow px-4 rounded-lg" />

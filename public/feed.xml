@@ -4,7 +4,7 @@
         <title>Michal Zimmermann</title>
         <link>https://webdev.zimmi.cz</link>
         <description>Pieces of knowledge from the world of web development.</description>
-        <lastBuildDate>Fri, 25 Mar 2022 19:04:01 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 25 Mar 2022 19:22:30 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -39,22 +39,6 @@ Go back <a href="/">home</a>.</p>
             <author>zimmicz@gmail.com (Michal Zimmermann)</author>
         </item>
         <item>
-            <title><![CDATA[Second post]]></title>
-            <link>https://webdev.zimmi.cz/posts/second-post</link>
-            <guid>https://webdev.zimmi.cz/posts/second-post</guid>
-            <pubDate>Sun, 14 Nov 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[Second post]]></description>
-            <content:encoded><![CDATA[<p class="my-5 sm:text-lg">This is my second post.
-The title and description are pulled from the MDX file and processed using <code>mdx-bundler</code>.
-Now I will render a cool component from the same folder.</p>
-<h2 class="font-title font-bold text-3xl lg:text-5xl my-5">Hello h2</h2>
-<p class="my-5 sm:text-lg">I&#x27;m also using custom Link Component
-Go back <a href="/">home</a>.</p>
-<h2 class="font-title font-bold text-3xl lg:text-5xl my-5">Code block</h2>
-<div class="ch-codeblock not-prose"><div class="ch-code" style="margin:0;padding:0;white-space:pre;overflow:hidden;opacity:0"><code class="ch-code-scroll-parent"><br/><div><div style="display:inline-block"><span>const getStaticProps = async ({ params }) =&gt; {</span></div></div><div><div style="display:inline-block"><span>    const post = await getSinglePost(params.slug);</span></div></div><div><div style="display:inline-block"><span>    console.log(&#x27;post&#x27;, post);</span></div></div><div><div style="display:inline-block"><span>    return {</span></div></div><div><div style="display:inline-block"><span>        props: { ...post },</span></div></div><div><div style="display:inline-block"><span>    };</span></div></div><div><div style="display:inline-block"><span>};</span></div></div><br/></code></div></div>]]></content:encoded>
-            <author>zimmicz@gmail.com (Michal Zimmermann)</author>
-        </item>
-        <item>
             <title><![CDATA[Fourth post]]></title>
             <link>https://webdev.zimmi.cz/posts/fourth-post</link>
             <guid>https://webdev.zimmi.cz/posts/fourth-post</guid>
@@ -78,6 +62,22 @@ The title and description are pulled from the MDX file and processed using <code
 Now I will render a cool component from the same folder.</p>
 <h2 class="font-title font-bold text-3xl lg:text-5xl my-5">Hello h2</h2>
 <p class="my-5 sm:text-lg">Go back <a href="/">home</a>.</p>]]></content:encoded>
+            <author>zimmicz@gmail.com (Michal Zimmermann)</author>
+        </item>
+        <item>
+            <title><![CDATA[Second post]]></title>
+            <link>https://webdev.zimmi.cz/posts/second-post</link>
+            <guid>https://webdev.zimmi.cz/posts/second-post</guid>
+            <pubDate>Sun, 14 Nov 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Second post]]></description>
+            <content:encoded><![CDATA[<p class="my-5 sm:text-lg">This is my second post.
+The title and description are pulled from the MDX file and processed using <code>mdx-bundler</code>.
+Now I will render a cool component from the same folder.</p>
+<h2 class="font-title font-bold text-3xl lg:text-5xl my-5">Hello h2</h2>
+<p class="my-5 sm:text-lg">I&#x27;m also using custom Link Component
+Go back <a href="/">home</a>.</p>
+<h2 class="font-title font-bold text-3xl lg:text-5xl my-5">Code block</h2>
+<div class="ch-codeblock not-prose"><div class="ch-code" style="margin:0;padding:0;white-space:pre;overflow:hidden;opacity:0"><code class="ch-code-scroll-parent"><br/><div><div style="display:inline-block"><span>const getStaticProps = async ({ params }) =&gt; {</span></div></div><div><div style="display:inline-block"><span>    const post = await getSinglePost(params.slug);</span></div></div><div><div style="display:inline-block"><span>    console.log(&#x27;post&#x27;, post);</span></div></div><div><div style="display:inline-block"><span>    return {</span></div></div><div><div style="display:inline-block"><span>        props: { ...post },</span></div></div><div><div style="display:inline-block"><span>    };</span></div></div><div><div style="display:inline-block"><span>};</span></div></div><br/></code></div></div>]]></content:encoded>
             <author>zimmicz@gmail.com (Michal Zimmermann)</author>
         </item>
     </channel>

@@ -10,7 +10,7 @@ const Post = (props: Resolve<ReturnType<typeof getSinglePost>>) => (
   </Layout>
 );
 
-const getStaticProps = async ({ params }) => {
+const getStaticProps = async ({ params }: { params: Pick<Post, 'slug'> }) => {
   const post = await getSinglePost(params.slug);
   return {
     props: { ...post },
