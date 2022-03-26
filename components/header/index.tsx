@@ -5,8 +5,11 @@ import { MenuLink } from '..';
 import FileText from '../../public/icons/file-text.svg';
 import Code from '../../public/icons/code.svg';
 import Rss from '../../public/icons/rss.svg';
+import ChevronDown from '../../public/icons/chevron-down.svg';
 import { BLOG_TITLE, BLOG_DESCRIPTION } from '../../config';
 import { useToggle } from '../../hooks';
+import { Menu, MenuButton, MenuItems, MenuPopover, MenuLink as ReachUIMenuLink } from '@reach/menu-button';
+import { positionRight } from '@reach/popover';
 
 const Header = () => {
   const ref = React.useRef<HTMLHeadElement>(null);
@@ -73,6 +76,9 @@ const Header = () => {
               </Link>
             </li>
             <li>
+              <Categories />
+            </li>
+            <li>
               <Link href="/feed.xml" passHref>
                 <MenuLink className="flex items-center space-x-3">
                   <span>rss</span>
@@ -103,5 +109,25 @@ const classNames = {
     navigation: 'w-full flex items-end md:flex-col text-xl md:text-right space-x-10 md:space-y-3',
   },
 };
+
+const Categories = () => (
+  <Menu>
+    <MenuButton className="py-2 text-primary text-decoration-fade from-primary to-primary font-bold flex items-center space-x-3">
+      <span>categories</span>
+      <span className="pt-1">
+        <ChevronDown />
+      </span>
+    </MenuButton>
+    <MenuPopover position={positionRight} className="z-10">
+      <MenuItems className="grid-cols-3 grid bg-white gap-1 p-3 drop-shadow-sm">
+        {['webpack', 'react', 'typescript', 'category 1'].map((category) => (
+          <ReachUIMenuLink as={MenuLink} key={category} className="text-center" href={`categories/${category}`}>
+            {category}
+          </ReachUIMenuLink>
+        ))}
+      </MenuItems>
+    </MenuPopover>
+  </Menu>
+);
 
 export { Header };
