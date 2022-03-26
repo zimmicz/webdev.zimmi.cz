@@ -1,4 +1,4 @@
-import { motion, useViewportScroll } from 'framer-motion';
+import { AnimatePresence, motion, useViewportScroll } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
 import { MenuLink } from '..';
@@ -49,7 +49,7 @@ const Header = () => {
       className={header}
     >
       <div className={content}>
-        <motion.div animate={{ x: 0 }} initial={{ x: -50 }} className="">
+        <motion.div animate={{ x: 0 }} initial={{ x: -50 }}>
           <Link href="/">
             <a>
               <h1 className={title}>{BLOG_TITLE}</h1>
@@ -61,7 +61,7 @@ const Header = () => {
           <ul className={navigation}>
             <li>
               <Link href="/posts" passHref>
-                <MenuLink className="flex items-center space-x-3">
+                <MenuLink className="flex items-center space-x-3 self-center">
                   <span>posts</span>
                   <FileText className="my-icon-primary" />
                 </MenuLink>
@@ -69,18 +69,18 @@ const Header = () => {
             </li>
             <li>
               <Link href="/snippets" passHref>
-                <MenuLink className="flex items-center space-x-3">
+                <MenuLink className="flex items-center space-x-3 self-center">
                   <span>snippets</span>
                   <Code className="my-icon-primary" />
                 </MenuLink>
               </Link>
             </li>
-            <li>
-              <Categories />
+            <li className="self-center">
+              <Categories className={expanded ? 'font-bold' : ''} />
             </li>
             <li>
               <Link href="/feed.xml" passHref>
-                <MenuLink className="flex items-center space-x-3">
+                <MenuLink className="flex items-center space-x-3 self-center">
                   <span>rss</span>
                   <Rss className="my-icon-primary" />
                 </MenuLink>
@@ -110,24 +110,41 @@ const classNames = {
   },
 };
 
-const Categories = () => (
-  <Menu>
-    <MenuButton className="py-2 text-primary text-decoration-fade from-primary to-primary font-bold flex items-center space-x-3">
-      <span>categories</span>
-      <span className="pt-1">
-        <ChevronDown />
-      </span>
-    </MenuButton>
-    <MenuPopover position={positionRight} className="z-10">
-      <MenuItems className="grid-cols-3 grid bg-white gap-1 p-3 drop-shadow-sm">
-        {['webpack', 'react', 'typescript', 'category 1'].map((category) => (
-          <ReachUIMenuLink as={MenuLink} key={category} className="text-center" href={`categories/${category}`}>
-            {category}
-          </ReachUIMenuLink>
-        ))}
-      </MenuItems>
-    </MenuPopover>
-  </Menu>
-);
+const Categories = ({ className }: { className?: string }) => {
+  const AnimatedMenuPopover = motion(MenuPopover);
+  const [isOpen, { toggle }] = useToggle();
+  return (
+    <Menu>
+      <MenuButton
+        onClick={toggle}
+        className={`text-primary text-decoration-fade from-primary to-primary flex items-center space-x-3 ${className}`}
+      >
+        <span>categories</span>
+        <span className="self-end">
+          <ChevronDown />
+        </span>
+      </MenuButton>
+      <AnimatePresence>
+        {isOpen ? (
+          <AnimatedMenuPopover
+            initial={{ opacity: 0, scale: 0 }}
+            exit={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            position={positionRight}
+            className="z-10"
+          >
+            <MenuItems className="grid-cols-3 grid bg-white gap-1 p-3 drop-shadow-sm transition-all transition-opacity">
+              {['webpack', 'react', 'typescript', 'category 1'].map((category) => (
+                <ReachUIMenuLink as={MenuLink} key={category} className="text-center" href={`categories/${category}`}>
+                  {category}
+                </ReachUIMenuLink>
+              ))}
+            </MenuItems>
+          </AnimatedMenuPopover>
+        ) : null}
+      </AnimatePresence>
+    </Menu>
+  );
+};
 
 export { Header };
