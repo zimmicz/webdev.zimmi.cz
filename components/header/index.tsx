@@ -111,13 +111,12 @@ const classNames = {
   },
 };
 
+const AnimatedMenuPopover = motion(MenuPopover);
+
 const Categories = ({ className }: { className?: string }) => {
-  const AnimatedMenuPopover = motion(MenuPopover);
-  const [isOpen, { toggle }] = useToggle();
   return (
     <Menu>
       <MenuButton
-        onClick={toggle}
         className={`text-primary text-decoration-fade from-primary to-primary flex items-center space-x-3 ${className}`}
       >
         <span>categories</span>
@@ -126,33 +125,25 @@ const Categories = ({ className }: { className?: string }) => {
         </span>
       </MenuButton>
       <AnimatePresence>
-        {isOpen ? (
-          <AnimatedMenuPopover
-            initial={{ opacity: 0, y: -20, pointerEvents: 'none' }}
-            exit={{ opacity: 0, y: 0, pointerEvents: 'none' }}
-            animate={{ opacity: 1, y: 20, transitionEnd: { pointerEvents: 'all' } }}
-            position={positionRight}
-            className="z-10"
-          >
-            <MenuItems className="font-bold flex flex-wrap gap-x-6 bg-white py-3 px-5 drop-shadow-sm transition-all transition-opacity">
-              <div className="flex flex-col gap-y-2">
-                {leftColumn.map((category) => (
-                  <ReachUIMenuLink key={category} as={MenuLink} href={`categories/${category}`}>
-                    {category}
-                  </ReachUIMenuLink>
-                ))}
-              </div>
+        <AnimatedMenuPopover position={positionRight} className="z-10">
+          <MenuItems className="font-bold flex flex-wrap gap-x-6 bg-white py-3 px-5 drop-shadow-sm transition-all transition-opacity">
+            <div className="flex flex-col gap-y-2">
+              {leftColumn.map((category) => (
+                <ReachUIMenuLink key={category} as={MenuLink} href={`categories/${category}`}>
+                  {category}
+                </ReachUIMenuLink>
+              ))}
+            </div>
 
-              <div className="flex flex-col gap-y-2">
-                {rightColumn.map((category) => (
-                  <ReachUIMenuLink key={category} as={MenuLink} href={`categories/${category}`}>
-                    {category}
-                  </ReachUIMenuLink>
-                ))}
-              </div>
-            </MenuItems>
-          </AnimatedMenuPopover>
-        ) : null}
+            <div className="flex flex-col gap-y-2">
+              {rightColumn.map((category) => (
+                <ReachUIMenuLink key={category} as={MenuLink} href={`categories/${category}`}>
+                  {category}
+                </ReachUIMenuLink>
+              ))}
+            </div>
+          </MenuItems>
+        </AnimatedMenuPopover>
       </AnimatePresence>
     </Menu>
   );
