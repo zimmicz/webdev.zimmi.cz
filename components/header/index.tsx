@@ -10,6 +10,7 @@ import { BLOG_TITLE, BLOG_DESCRIPTION } from '../../config';
 import { useToggle } from '../../hooks';
 import { Menu, MenuButton, MenuItems, MenuPopover, MenuLink as ReachUIMenuLink } from '@reach/menu-button';
 import { positionRight } from '@reach/popover';
+import _ from 'lodash';
 
 const Header = () => {
   const ref = React.useRef<HTMLHeadElement>(null);
@@ -128,17 +129,27 @@ const Categories = ({ className }: { className?: string }) => {
         {isOpen ? (
           <AnimatedMenuPopover
             initial={{ opacity: 0, y: -20, pointerEvents: 'none' }}
-            exit={{ opacity: 0, y: -20, pointerEvents: 'none' }}
+            exit={{ opacity: 0, y: 0, pointerEvents: 'none' }}
             animate={{ opacity: 1, y: 20, transitionEnd: { pointerEvents: 'all' } }}
             position={positionRight}
             className="z-10"
           >
-            <MenuItems className="grid-cols-3 grid bg-white gap-1 p-3 drop-shadow-sm transition-all transition-opacity">
-              {['webpack', 'react', 'typescript', 'category 1'].map((category) => (
-                <ReachUIMenuLink as={MenuLink} key={category} className="text-center" href={`categories/${category}`}>
-                  {category}
-                </ReachUIMenuLink>
-              ))}
+            <MenuItems className="font-bold flex flex-wrap gap-x-6 bg-white py-3 px-5 drop-shadow-sm transition-all transition-opacity">
+              <div className="flex flex-col gap-y-2">
+                {leftColumn.map((category) => (
+                  <ReachUIMenuLink key={category} as={MenuLink} href={`categories/${category}`}>
+                    {category}
+                  </ReachUIMenuLink>
+                ))}
+              </div>
+
+              <div className="flex flex-col gap-y-2">
+                {rightColumn.map((category) => (
+                  <ReachUIMenuLink key={category} as={MenuLink} href={`categories/${category}`}>
+                    {category}
+                  </ReachUIMenuLink>
+                ))}
+              </div>
             </MenuItems>
           </AnimatedMenuPopover>
         ) : null}
@@ -146,5 +157,9 @@ const Categories = ({ className }: { className?: string }) => {
     </Menu>
   );
 };
+
+const categories = ['webpack', 'react', 'typescript', 'category 1', 'category 2', 'category 3'];
+const pivot = _.ceil(categories.length / 2);
+const [leftColumn, rightColumn] = _.chunk(categories, pivot);
 
 export { Header };
