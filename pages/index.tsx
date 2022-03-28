@@ -1,25 +1,35 @@
 import React from 'react';
-import { Layout, Teaser } from '../components';
+import { Header, Layout, Teaser } from '../components';
 import { generateFeed } from '../lib/feed';
-import { getAllPosts } from '../lib/utils';
+import { getAllPosts, getCategories } from '../lib/utils';
 
-function Home({ posts }: { posts: PromiseReturnType<ReturnType<typeof getAllPosts>> }) {
+function Home({
+  categories,
+  posts,
+}: {
+  posts: PromiseReturnType<ReturnType<typeof getAllPosts>>;
+  categories: ReturnType<typeof getCategories>;
+}) {
   return (
-    <Layout>
-      {posts.map((post, index) => (
-        <Teaser key={index} {...post} />
-      ))}
-    </Layout>
+    <>
+      <Header categories={categories} />
+      <Layout>
+        {posts.map((post, index) => (
+          <Teaser key={index} {...post} />
+        ))}
+      </Layout>
+    </>
   );
 }
 
 const getStaticProps = async () => {
   const posts = await getAllPosts();
+  const categories = getCategories(posts);
 
   generateFeed(posts);
 
   return {
-    props: { posts },
+    props: { categories, posts },
   };
 };
 

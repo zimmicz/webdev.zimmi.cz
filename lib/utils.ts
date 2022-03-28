@@ -6,6 +6,7 @@ import { bundleMDX } from 'mdx-bundler';
 import { remarkCodeHike } from '@code-hike/mdx';
 import theme from 'shiki/themes/dark-plus.json';
 import { POSTS_PATH } from '../config';
+import _ from 'lodash';
 
 export const getSourceOfFile = (fileName: string) => {
   return fs.readFileSync(path.join(POSTS_PATH, fileName));
@@ -51,6 +52,14 @@ export const getSinglePost = async (slug: string) => {
     slug,
   };
 };
+
+export const getCategories = (posts: Post[]) =>
+  _(posts)
+    .map((post) => _.result<string[]>(post, 'frontmatter.categories'))
+    .flatten()
+    .uniq()
+    .sort()
+    .valueOf();
 
 const slugify = (filepath: string) => {
   const result = filepath.replace(path.join(POSTS_PATH), '').replace('.mdx', '').split('/').reverse()[0];

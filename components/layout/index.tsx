@@ -1,10 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Header, Metadata } from '../';
+import { Metadata } from '../';
 
 const Layout = ({ children, ...props }: React.PropsWithChildren<unknown>) => (
   <>
-    <Header />
     {/*
         TODO find a better way to leave space for responsive header than using pt-
     */}
