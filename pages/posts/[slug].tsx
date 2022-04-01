@@ -1,19 +1,30 @@
 import React from 'react';
-import { getAllPosts, getSinglePost } from '../../lib/utils';
-import { Layout, Post as PostComponent } from '../../components';
+import { getAllPosts, getAllCategories, getSinglePost } from '../../lib/utils';
+import { Header, Layout, Post as PostComponent } from '../../components';
 
-type Resolve<T> = T extends Promise<infer Item> ? Item : T;
+type Props = {
+  post: PromiseReturnType<ReturnType<typeof getSinglePost>>;
+  categories: PromiseReturnType<ReturnType<typeof getAllCategories>>;
+};
 
-const Post = (props: Resolve<ReturnType<typeof getSinglePost>>) => (
-  <Layout>
-    <PostComponent {...props} />
-  </Layout>
+const Post = ({ categories, post }: Props) => (
+  <>
+    <Header categories={categories} />
+    <Layout>
+      <PostComponent {...post} />
+    </Layout>
+  </>
 );
 
 const getStaticProps = async ({ params }: { params: Pick<Post, 'slug'> }) => {
+  const categories = await getAllCategories();
+
   const post = await getSinglePost(params.slug);
   return {
-    props: { ...post },
+    props: {
+      post,
+      categories,
+    },
   };
 };
 

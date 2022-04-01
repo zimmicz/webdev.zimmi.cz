@@ -11,9 +11,9 @@ import { useToggle } from '../../hooks';
 import { Menu, MenuButton, MenuItems, MenuPopover, MenuLink as ReachUIMenuLink } from '@reach/menu-button';
 import { positionRight } from '@reach/popover';
 import _ from 'lodash';
-import type { getCategories } from '../../lib/utils';
+import type { getAllCategories } from '../../lib/utils';
 
-const Header = ({ categories }: { categories: ReturnType<typeof getCategories> }) => {
+const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeof getAllCategories>> }) => {
   const pivot = _.ceil(categories.length / 2);
   const [leftColumn, rightColumn] = _.chunk(categories, pivot);
   const { scrollY } = useViewportScroll();

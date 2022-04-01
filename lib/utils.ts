@@ -8,11 +8,11 @@ import theme from 'shiki/themes/dark-plus.json';
 import { POSTS_PATH } from '../config';
 import _ from 'lodash';
 
-export const getSourceOfFile = (fileName: string) => {
+const getSourceOfFile = (fileName: string) => {
   return fs.readFileSync(path.join(POSTS_PATH, fileName));
 };
 
-export const getAllPosts = async () => {
+const getAllPosts = async () => {
   const posts = await globby(POSTS_PATH, {
     expandDirectories: {
       extensions: ['mdx'],
@@ -27,7 +27,7 @@ export const getAllPosts = async () => {
   );
 };
 
-export const getSinglePost = async (slug: string) => {
+const getSinglePost = async (slug: string) => {
   const source = getSourceOfFile(slug + '/' + slug + '.mdx').toString();
 
   const { code, frontmatter, matter } = await bundleMDX(source, {
@@ -53,15 +53,20 @@ export const getSinglePost = async (slug: string) => {
   };
 };
 
-export const getCategories = (posts: Post[]) =>
-  _(posts)
+const getAllCategories = async () => {
+  const posts = await getAllPosts();
+
+  return _(posts)
     .map((post) => _.result<string[]>(post, 'frontmatter.categories'))
     .flatten()
     .uniq()
     .sort()
     .valueOf();
+};
 
 const slugify = (filepath: string) => {
   const result = filepath.replace(path.join(POSTS_PATH), '').replace('.mdx', '').split('/').reverse()[0];
   return result;
 };
+
+export { getAllCategories, getSinglePost, getSourceOfFile, getAllPosts };
