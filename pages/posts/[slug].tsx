@@ -17,7 +17,8 @@ const Post = ({ categories, post }: Props) => (
 );
 
 const getStaticProps = async ({ params }: { params: Pick<Post, 'slug'> }) => {
-  const categories = await getAllCategories();
+  const posts = await getAllPosts();
+  const categories = getAllCategories(posts);
 
   const post = await getSinglePost(params.slug);
   return {
