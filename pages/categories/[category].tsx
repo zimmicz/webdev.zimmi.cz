@@ -16,7 +16,7 @@ const Category = ({ category, categories, posts }: Props) => {
       <Layout>
         <Typography.H2 className="py-4 capitalize flex items-center space-x-2">
           <span>{category}</span>
-          <Tag className="mt-[7px]" />
+          <Tag className="mt-[7px] lg:mt-[14px]" />
         </Typography.H2>
         {posts.map((post) => (
           <Teaser key={post.slug} {...post} />
