@@ -3,13 +3,12 @@ import { Header, Layout, Teaser } from '../components';
 import { generateFeed } from '../lib/feed';
 import { getAllPosts, getAllCategories } from '../lib/utils';
 
-function Home({
-  categories,
-  posts,
-}: {
+type Props = {
   posts: PromiseReturnType<ReturnType<typeof getAllPosts>>;
   categories: PromiseReturnType<ReturnType<typeof getAllCategories>>;
-}) {
+};
+
+function Home({ categories, posts }: Props) {
   return (
     <>
       <Header categories={categories} />
