@@ -1,6 +1,6 @@
 import React from 'react';
-import { Header, Layout, Teaser } from '../../../components';
-import { getAllPosts, getAllCategories } from '../../../lib/utils';
+import { Header, Layout, Teaser } from '../../components';
+import { getAllPosts, getAllCategories } from '../../lib/utils';
 
 type Props = {
   posts: PromiseReturnType<ReturnType<typeof getAllPosts>>;
@@ -20,11 +20,12 @@ const Category = ({ categories, posts }: Props) => (
 
 const getStaticProps = async ({ params }: { params: { category: Props['categories'][number] } }) => {
   const posts = await getAllPosts();
+  const filteredPosts = posts.filter((post) => post.frontmatter.categories.includes(params.category));
   const categories = getAllCategories(posts);
 
   return {
     props: {
-      posts,
+      posts: filteredPosts,
       categories,
     },
   };
@@ -32,7 +33,7 @@ const getStaticProps = async ({ params }: { params: { category: Props['categorie
 
 const getStaticPaths = async () => {
   const posts = await getAllPosts();
-  const paths = getAllCategories(posts).map((category) => `/posts/categories/${category}`);
+  const paths = getAllCategories(posts).map((category) => `/categories/${category}`);
   return {
     paths,
     fallback: false,

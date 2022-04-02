@@ -59,7 +59,7 @@ const BasePost = ({
       <ul className="flex space-x-6">
         {categories.map((category) => (
           <li key={category}>
-            <Link href="/categories/react">
+            <Link href={`/categories/${category}`}>
               <a className="bg-white text-primary pb-2 font-title font-bold text-lg text-decoration-fade from-primary to-primary">
                 {category}
               </a>
