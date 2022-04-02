@@ -26,9 +26,10 @@ const getAllPosts = async () => {
     }),
   );
 
-  posts.sort(sortByDate);
+  const published = posts.filter((post) => post.frontmatter.type === 'post' && post.frontmatter.status === 'published');
+  published.sort(sortByDate);
 
-  return posts;
+  return published;
 };
 
 const getSinglePost = async (slug: string) => {

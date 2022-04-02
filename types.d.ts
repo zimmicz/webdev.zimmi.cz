@@ -6,6 +6,8 @@ declare global {
   type Post = {
     code: string;
     frontmatter: {
+      status: 'draft' | 'published';
+      type: 'post' | 'snippet';
       image?: {
         url: string;
         aspectRatio: string;
