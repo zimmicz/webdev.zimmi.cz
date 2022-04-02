@@ -94,7 +94,7 @@ const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeo
                     <MenuItems className="font-bold flex flex-wrap gap-x-6 bg-white py-3 px-5 drop-shadow-sm transition-all transition-opacity">
                       <div className="flex flex-col gap-y-2">
                         {leftColumn.map((category) => (
-                          <ReachUIMenuLink key={category} as={MenuLink} href={`categories/${category}`}>
+                          <ReachUIMenuLink key={category} as={MenuLink} href={`/categories/${category}`}>
                             {category}
                           </ReachUIMenuLink>
                         ))}
