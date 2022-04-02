@@ -26,18 +26,7 @@ const getAllPosts = async () => {
     }),
   );
 
-  posts.sort((a, b) => {
-    const aDate = new Date(a.frontmatter.publishedAt);
-    const bDate = new Date(b.frontmatter.publishedAt);
-
-    if (aDate === bDate) {
-      return 0;
-    } else if (aDate > bDate) {
-      return 1;
-    }
-
-    return -1;
-  });
+  posts.sort(sortByDate);
 
   return posts;
 };
@@ -79,6 +68,19 @@ const getAllCategories = (posts: Post[]) =>
 const slugify = (filepath: string) => {
   const result = filepath.replace(path.join(POSTS_PATH), '').replace('.mdx', '').split('/').reverse()[0];
   return result;
+};
+
+const sortByDate = (a: Post, b: Post) => {
+  const aDate = new Date(a.frontmatter.publishedAt);
+  const bDate = new Date(b.frontmatter.publishedAt);
+
+  if (aDate === bDate) {
+    return 0;
+  } else if (aDate > bDate) {
+    return 1;
+  }
+
+  return -1;
 };
 
 export { getAllCategories, getSinglePost, getSourceOfFile, getAllPosts };
