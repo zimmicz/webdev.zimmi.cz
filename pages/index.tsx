@@ -24,7 +24,7 @@ function Home({
 
 const getStaticProps = async () => {
   const posts = await getAllPosts();
-  const categories = await getAllCategories();
+  const categories = getAllCategories(posts);
 
   generateFeed(posts);
 

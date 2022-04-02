@@ -53,16 +53,13 @@ const getSinglePost = async (slug: string) => {
   };
 };
 
-const getAllCategories = async () => {
-  const posts = await getAllPosts();
-
-  return _(posts)
+const getAllCategories = (posts: Post[]) =>
+  _(posts)
     .map((post) => _.result<string[]>(post, 'frontmatter.categories'))
     .flatten()
     .uniq()
     .sort()
     .valueOf();
-};
 
 const slugify = (filepath: string) => {
   const result = filepath.replace(path.join(POSTS_PATH), '').replace('.mdx', '').split('/').reverse()[0];
