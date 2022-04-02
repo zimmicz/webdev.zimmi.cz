@@ -13,18 +13,33 @@ const getSourceOfFile = (fileName: string) => {
 };
 
 const getAllPosts = async () => {
-  const posts = await globby(POSTS_PATH, {
+  const files = await globby(POSTS_PATH, {
     expandDirectories: {
       extensions: ['mdx'],
     },
   });
 
-  return Promise.all(
-    posts.map(async (fileName) => {
+  const posts = await Promise.all(
+    files.map(async (fileName) => {
       const post = await getSinglePost(slugify(fileName));
       return post;
     }),
   );
+
+  posts.sort((a, b) => {
+    const aDate = new Date(a.frontmatter.publishedAt);
+    const bDate = new Date(b.frontmatter.publishedAt);
+
+    if (aDate === bDate) {
+      return 0;
+    } else if (aDate > bDate) {
+      return 1;
+    }
+
+    return -1;
+  });
+
+  return posts;
 };
 
 const getSinglePost = async (slug: string) => {
