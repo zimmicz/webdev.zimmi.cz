@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Layout, Teaser } from '../components';
+import { Header, Layout, Teaser, Typography } from '../components';
 import { generateFeed } from '../lib/feed';
 import { getAllPosts, getAllCategories } from '../lib/utils';
 
@@ -13,6 +13,7 @@ function Home({ categories, posts }: Props) {
     <>
       <Header categories={categories} />
       <Layout>
+        <Typography.H2>Latest</Typography.H2>
         {posts.map((post, index) => (
           <Teaser key={index} {...post} />
         ))}

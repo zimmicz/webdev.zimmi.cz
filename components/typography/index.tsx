@@ -4,12 +4,12 @@ const common = {
   heading: 'font-title font-bold text-3xl lg:text-5xl',
 };
 
-const H1 = ({ children, className }: React.PropsWithChildren<Pick<HTMLHeadingElement, 'className'>>) => {
+const H1 = ({ children, className }: React.PropsWithChildren<Partial<Pick<HTMLHeadingElement, 'className'>>>) => {
   return <h1 className={`${common.heading} leading-snug lg:leading-snug text-primary ${className}`}>{children}</h1>;
 };
 
-const H2 = ({ children }: React.PropsWithChildren<unknown>) => {
-  return <h2 className={`${common.heading} my-5`}>{children}</h2>;
+const H2 = ({ children, className }: React.PropsWithChildren<Partial<Pick<HTMLHeadingElement, 'className'>>>) => {
+  return <h2 className={`${common.heading} my-5 ${className}`}>{children}</h2>;
 };
 
 const H3 = ({ children }: React.PropsWithChildren<unknown>) => {
