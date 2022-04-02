@@ -59,13 +59,13 @@ const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeo
           </Link>
           <p className={description}>{BLOG_DESCRIPTION}</p>
         </motion.div>
-        <nav className="md:ml-auto">
+        <nav className="md:ml-auto w-full sm:w-auto">
           <ul className={navigation}>
             <li>
               <Link href="/posts" passHref>
                 <MenuLink className="flex items-center space-x-3 self-center">
                   <span>posts</span>
-                  <FileText className="my-icon-primary" />
+                  <FileText className="my-icon-primary hidden sm:block" />
                 </MenuLink>
               </Link>
             </li>
@@ -73,7 +73,7 @@ const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeo
               <Link href="/snippets" passHref>
                 <MenuLink className="flex items-center space-x-3 self-center">
                   <span>snippets</span>
-                  <Code className="my-icon-primary self-end" />
+                  <Code className="my-icon-primary self-end hidden sm:block" />
                 </MenuLink>
               </Link>
             </li>
@@ -85,9 +85,7 @@ const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeo
                   }`}
                 >
                   <span>categories</span>
-                  <span className="self-end">
-                    <ChevronDown />
-                  </span>
+                  <ChevronDown className="my-icon-primary hidden sm:block self-end" />
                 </MenuButton>
                 <AnimatePresence>
                   <AnimatedMenuPopover position={positionRight} className="z-10">
@@ -116,7 +114,7 @@ const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeo
               <Link href="/feed.xml" passHref>
                 <MenuLink className="flex items-center space-x-3 self-center">
                   <span>rss</span>
-                  <Rss className="my-icon-primary" />
+                  <Rss className="my-icon-primary hidden sm:block" />
                 </MenuLink>
               </Link>
             </li>
@@ -140,7 +138,8 @@ const classNames = {
     content: 'max-w-[100%] w-[90ch] flex mx-auto items-center flex-wrap md:flex-nowrap justify-center',
     title: 'text-5xl sm:text-7xl',
     description: 'sm:text-lg md:text-2xl text-gray-500 sm:mt-5 my-2 text-center md:text-left',
-    navigation: 'w-full flex items-end md:flex-col text-xl md:text-right space-x-3 sm:space-x-10 md:space-y-3',
+    navigation:
+      'w-full flex justify-center items-end md:flex-col text-xl md:text-right space-x-3 sm:space-x-10 md:space-y-3',
   },
 };
 
