@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header, Layout, Teaser, Typography } from '../../components';
 import { getAllPosts, getAllCategories } from '../../lib/utils';
+import Tag from '../../public/icons/tag.svg';
 
 type Props = {
   posts: PromiseReturnType<ReturnType<typeof getAllPosts>>;
@@ -13,7 +14,10 @@ const Category = ({ category, categories, posts }: Props) => {
     <>
       <Header categories={categories} />
       <Layout>
-        <Typography.H2 className="py-4 capitalize">{category}</Typography.H2>
+        <Typography.H2 className="py-4 capitalize flex items-center space-x-2">
+          <span>{category}</span>
+          <Tag className="mt-[7px]" />
+        </Typography.H2>
         {posts.map((post) => (
           <Teaser key={post.slug} {...post} />
         ))}
