@@ -1,22 +1,26 @@
 import React from 'react';
-import { Header, Layout, Teaser } from '../../components';
+import { Header, Layout, Teaser, Typography } from '../../components';
 import { getAllPosts, getAllCategories } from '../../lib/utils';
 
 type Props = {
   posts: PromiseReturnType<ReturnType<typeof getAllPosts>>;
   categories: PromiseReturnType<ReturnType<typeof getAllCategories>>;
+  category: Props['categories'][number];
 };
 
-const Category = ({ categories, posts }: Props) => (
-  <>
-    <Header categories={categories} />
-    <Layout>
-      {posts.map((post) => (
-        <Teaser key={post.slug} {...post} />
-      ))}
-    </Layout>
-  </>
-);
+const Category = ({ category, categories, posts }: Props) => {
+  return (
+    <>
+      <Header categories={categories} />
+      <Layout>
+        <Typography.H2 className="py-4 capitalize">{category}</Typography.H2>
+        {posts.map((post) => (
+          <Teaser key={post.slug} {...post} />
+        ))}
+      </Layout>
+    </>
+  );
+};
 
 const getStaticProps = async ({ params }: { params: { category: Props['categories'][number] } }) => {
   const posts = await getAllPosts();
@@ -27,6 +31,7 @@ const getStaticProps = async ({ params }: { params: { category: Props['categorie
     props: {
       posts: filteredPosts,
       categories,
+      category: params.category,
     },
   };
 };

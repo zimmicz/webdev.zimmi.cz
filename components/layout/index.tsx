@@ -7,7 +7,7 @@ const Layout = ({ children, ...props }: React.PropsWithChildren<unknown>) => (
     {/*
         TODO find a better way to leave space for responsive header than using pt-
     */}
-    <main className="w-[80ch] max-w-[100%] min-h-screen mx-auto pt-48 sm:pt-60 md:pt-80">
+    <main className="w-[80ch] max-w-[100%] min-h-screen mx-auto pt-48 sm:pt-60 md:pt-80 px-4 sm:px-10">
       <Metadata />
       <motion.div
         initial="hidden"

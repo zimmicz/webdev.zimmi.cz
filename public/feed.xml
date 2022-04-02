@@ -4,7 +4,7 @@
         <title>Michal Zimmermann</title>
         <link>https://webdev.zimmi.cz</link>
         <description>Pieces of knowledge from the world of web development.</description>
-        <lastBuildDate>Sat, 02 Apr 2022 08:56:49 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 02 Apr 2022 11:49:12 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -27,10 +27,10 @@
 </ol>
 <my-sidenote-warning>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean varius interdum purus nec laoreet. Nullam efficitur felis ut nisl placerat, sed egestas quam tincidunt</my-sidenote-warning>
 <p class="my-5 sm:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean varius interdum purus nec laoreet. Nullam efficitur felis ut nisl placerat, sed egestas quam tincidunt. Phasellus eu eros vitae sapien rhoncus aliquet vel vel ex. Praesent vitae urna venenatis, vestibulum risus vel, condimentum turpis. Morbi maximus imperdiet est at ultrices. Vivamus iaculis justo sed nulla pellentesque vestibulum. Aliquam id hendrerit sem. Integer ut velit felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur blandit sit amet tellus id pulvinar. Curabitur eros lectus, laoreet et metus vitae, euismod mattis dui. Quisque vitae fringilla magna. Pellentesque ac odio sed augue porta vulputate.</p>
-<h2 class="font-title font-bold text-3xl lg:text-5xl my-5">Hello h2</h2>
+<h2 class="font-title font-bold text-3xl lg:text-5xl my-5 undefined">Hello h2</h2>
 <p class="my-5 sm:text-lg">I&#x27;m also using custom Link Component
 Go back <a href="/">home</a>.</p>
-<h2 class="font-title font-bold text-3xl lg:text-5xl my-5">Code block</h2>
+<h2 class="font-title font-bold text-3xl lg:text-5xl my-5 undefined">Code block</h2>
 <div class="ch-codeblock not-prose"><div class="ch-code" style="margin:0;padding:0;white-space:pre;overflow:hidden;opacity:0"><code class="ch-code-scroll-parent"><br/><div><div style="display:inline-block"><span>const getStaticProps = async ({ params }) =&gt; {</span></div></div><div><div style="display:inline-block"><span>    const post = await getSinglePost(params.slug);</span></div></div><div><div style="display:inline-block"><span>    console.log(&#x27;post&#x27;, post);</span></div></div><div><div style="display:inline-block"><span>    return {</span></div></div><div><div style="display:inline-block"><span>        props: { ...post },</span></div></div><div><div style="display:inline-block"><span>    };</span></div></div><div><div style="display:inline-block"><span>};</span></div></div><br/></code></div></div>
 <p class="my-5 sm:text-lg">Aenean accumsan laoreet turpis, ut aliquet tellus porttitor vitae. Nulla ut ipsum semper, tristique mi posuere, ornare magna. Curabitur luctus eros nec elementum tincidunt. Integer eu ornare quam. Morbi vitae nunc nec odio ultrices blandit vitae eu nisl. Integer in molestie nisl, vitae lobortis nulla. Nam sed cursus mauris, vel molestie sapien. Mauris molestie finibus purus a tincidunt. Etiam sollicitudin et arcu ut egestas.</p>
 <p class="my-5 sm:text-lg">Suspendisse lacinia massa ac leo fringilla, in venenatis velit luctus. Mauris laoreet scelerisque facilisis. Duis pharetra aliquam enim, eget viverra mauris pharetra id. Fusce elementum risus id lacus scelerisque, placerat porta dui vestibulum. In eu justo enim. Donec vitae ex dolor. Vestibulum vulputate, mi id tempus ultrices, velit lacus consectetur orci, non luctus nisl massa vitae urna. Etiam cursus erat neque, eu venenatis purus efficitur vitae. Nunc quis justo sollicitudin tortor viverra ullamcorper sit amet a ligula. Vivamus sagittis facilisis quam, nec aliquam tortor. Aliquam erat volutpat. Nulla nec ornare velit. Nullam at tincidunt ipsum. Aliquam faucibus nunc et enim placerat blandit. Mauris et mollis ex. Pellentesque in sapien venenatis, varius ante eget, euismod velit.</p>
