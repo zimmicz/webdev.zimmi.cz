@@ -4,9 +4,6 @@ import { Metadata } from '../';
 
 const Layout = ({ children, ...props }: React.PropsWithChildren<unknown>) => (
   <>
-    {/*
-        TODO find a better way to leave space for responsive header than using pt-
-    */}
     <main className="w-[80ch] max-w-[100%] min-h-screen mx-auto my-10 px-4 sm:px-10">
       <Metadata />
       <motion.div
