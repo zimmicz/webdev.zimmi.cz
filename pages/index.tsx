@@ -26,11 +26,13 @@ const getStaticProps = async () => {
   const posts = await getPublished('post');
   const snippets = await getPublished('snippet');
   const categories = getAllCategories([...posts, ...snippets]);
+  const tenLatestPosts = posts.slice(0, 9);
+  const tenLatestSnippets = snippets.slice(0, 9);
 
-  generateFeed([...posts, ...snippets]);
+  generateFeed([...tenLatestPosts, ...tenLatestSnippets]);
 
   return {
-    props: { categories, posts },
+    props: { categories, posts: [...tenLatestPosts, ...tenLatestSnippets] },
   };
 };
 
