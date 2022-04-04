@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useViewportScroll } from 'framer-motion';
+import { motion, useViewportScroll } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
 import { MenuLink } from '..';
@@ -8,14 +8,11 @@ import Rss from '../../public/icons/rss.svg';
 import ChevronDown from '../../public/icons/chevron-down.svg';
 import { BLOG_TITLE, BLOG_DESCRIPTION } from '../../config';
 import { useToggle } from '../../hooks';
-import { Menu, MenuButton, MenuItems, MenuPopover, MenuLink as ReachUIMenuLink } from '@reach/menu-button';
-import { positionRight } from '@reach/popover';
-import _ from 'lodash';
+import { Menu, MenuButton } from '@reach/menu-button';
 import type { getAllCategories } from '../../lib/utils';
+import { Categories } from './components/categories';
 
 const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeof getAllCategories>> }) => {
-  const pivot = _.ceil(categories.length / 2);
-  const [leftColumn, rightColumn] = _.chunk(categories, pivot);
   const { scrollY } = useViewportScroll();
   const [expanded, { setOn: expand, setOff: collapse }] = useToggle(true);
   const { navigation, header, content, title, description } = expanded ? classNames.expanded : classNames.mini;
@@ -85,27 +82,7 @@ const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeo
                   <span>categories</span>
                   <ChevronDown className="my-icon-primary hidden sm:block self-end" />
                 </MenuButton>
-                <AnimatePresence>
-                  <AnimatedMenuPopover position={positionRight} className="z-10">
-                    <MenuItems className="font-bold flex flex-wrap gap-x-6 bg-white py-3 px-5 drop-shadow-sm transition-all transition-opacity">
-                      <div className="flex flex-col gap-y-2">
-                        {leftColumn.map((category) => (
-                          <ReachUIMenuLink key={category} as={MenuLink} href={`/categories/${category}`}>
-                            {category}
-                          </ReachUIMenuLink>
-                        ))}
-                      </div>
-
-                      <div className="flex flex-col gap-y-2">
-                        {rightColumn.map((category) => (
-                          <ReachUIMenuLink key={category} as={MenuLink} href={`/categories/${category}`}>
-                            {category}
-                          </ReachUIMenuLink>
-                        ))}
-                      </div>
-                    </MenuItems>
-                  </AnimatedMenuPopover>
-                </AnimatePresence>
+                <Categories categories={categories} />
               </Menu>
             </li>
             <li>
@@ -125,7 +102,6 @@ const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeo
 
 const classNames = {
   mini: {
-    //header: '',
     header: 'bg-gray-100 h-20 p-5 sticky top-0 z-10 w-full top-0 flex h-auto',
     content: 'max-w-[100%] w-[90ch] flex mx-auto items-center flex-wrap md:flex-nowrap justify-between space-y-0',
     title: 'text-xl',
@@ -133,7 +109,6 @@ const classNames = {
     navigation: 'flex space-x-5',
   },
   expanded: {
-    //header: '',
     header: 'bg-gray-100 p-5 md:py-10 sticky top-0 font-title font-bold w-full flex',
     content: 'max-w-[100%] w-[90ch] flex mx-auto items-center flex-wrap md:flex-nowrap justify-center',
     title: 'text-5xl sm:text-7xl',
@@ -142,7 +117,5 @@ const classNames = {
       'w-full flex justify-center items-end md:flex-col text-xl md:text-right space-x-3 sm:space-x-10 md:space-y-3',
   },
 };
-
-const AnimatedMenuPopover = motion(MenuPopover);
 
 export { Header };
