@@ -12,7 +12,7 @@ function Snippets({ categories, snippets: posts }: Props) {
     <>
       <Header categories={categories} />
       <Layout>
-        <Typography.H2 className="py-4">Latest</Typography.H2>
+        <Typography.H2 className="py-4">Latest snippets</Typography.H2>
         {posts ? posts.map((post, index) => <Teaser key={index} {...post} />) : 'not found'}
       </Layout>
     </>

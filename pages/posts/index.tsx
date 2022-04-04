@@ -12,7 +12,7 @@ function Posts({ categories, posts }: Props) {
     <>
       <Header categories={categories} />
       <Layout>
-        <Typography.H2 className="py-4">Latest</Typography.H2>
+        <Typography.H2 className="py-4">Latest posts</Typography.H2>
         {posts.map((post, index) => (
           <Teaser key={index} {...post} />
         ))}
