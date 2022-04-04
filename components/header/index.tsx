@@ -75,7 +75,7 @@ const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeo
             <li className="self-center">
               <Menu>
                 <MenuButton
-                  className={`text-primary text-decoration-fade from-primary to-primary flex items-center space-x-3 ${
+                  className={`text-primary text-decoration-fade from-primary to-primary flex items-center space-x-3 py-2 ${
                     expanded ? 'font-bold' : ''
                   }`}
                 >
