@@ -4,7 +4,7 @@
         <title>Michal Zimmermann</title>
         <link>https://webdev.zimmi.cz</link>
         <description>Pieces of knowledge from the world of web development.</description>
-        <lastBuildDate>Mon, 04 Apr 2022 15:58:40 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 04 Apr 2022 16:04:37 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -49,6 +49,19 @@ Go back <a href="/">home</a>.</p>
 <p class="my-5 sm:text-lg">This is my fourth post. There&#x27;s another one <a href="/posts/second-post">here</a>.</p>
 <p class="my-5 sm:text-lg">This is my fourth post. There&#x27;s another one <a href="/posts/second-post">here</a>.</p>
 <p class="my-5 sm:text-lg">This is my fourth post. There&#x27;s another one <a href="/posts/second-post">here</a>.</p>]]></content:encoded>
+            <author>zimmicz@gmail.com (Michal Zimmermann)</author>
+        </item>
+        <item>
+            <title><![CDATA[Third post]]></title>
+            <link>https://webdev.zimmi.cz/posts/third-post</link>
+            <guid>https://webdev.zimmi.cz/posts/third-post</guid>
+            <pubDate>Tue, 16 Nov 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Third post]]></description>
+            <content:encoded><![CDATA[<p class="my-5 sm:text-lg">This is my second post.
+The title and description are pulled from the MDX file and processed using <code>mdx-bundler</code>.
+Now I will render a cool component from the same folder.</p>
+<h2 class="font-title font-bold text-3xl lg:text-5xl my-5 undefined">Hello h2</h2>
+<p class="my-5 sm:text-lg">Go back <a href="/">home</a>.</p>]]></content:encoded>
             <author>zimmicz@gmail.com (Michal Zimmermann)</author>
         </item>
     </channel>

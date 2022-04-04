@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import Link from 'next/link';
 import type { getAllCategories } from '../../../../lib/utils';
 import { MenuItems, MenuLink as ReachUIMenuLink, MenuPopover } from '@reach/menu-button';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -15,17 +16,17 @@ const Categories = ({ categories }: { categories: PromiseReturnType<ReturnType<t
         <MenuItems className="font-bold flex flex-wrap gap-x-6 bg-white py-3 px-5 drop-shadow-sm transition-all transition-opacity">
           <div className="flex flex-col gap-y-2">
             {leftColumn?.map((category) => (
-              <ReachUIMenuLink key={category} as={MenuLink} href={`/categories/${category}`}>
-                {category}
-              </ReachUIMenuLink>
+              <Link href={`/categories/${category}`} passHref key={category}>
+                <ReachUIMenuLink as={MenuLink}>{category}</ReachUIMenuLink>
+              </Link>
             ))}
           </div>
 
           <div className="flex flex-col gap-y-2">
             {rightColumn?.map((category) => (
-              <ReachUIMenuLink key={category} as={MenuLink} href={`/categories/${category}`}>
-                {category}
-              </ReachUIMenuLink>
+              <Link href={`/categories/${category}`} passHref key={category}>
+                <ReachUIMenuLink as={MenuLink}>{category}</ReachUIMenuLink>
+              </Link>
             ))}
           </div>
         </MenuItems>

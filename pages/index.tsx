@@ -23,10 +23,11 @@ function Home({ categories, posts }: Props) {
 }
 
 const getStaticProps = async () => {
-  const posts = (await getPublished('post')).slice(0, 10);
-  const categories = getAllCategories(posts);
+  const posts = await getPublished('post');
+  const snippets = await getPublished('snippet');
+  const categories = getAllCategories([...posts, ...snippets]);
 
-  generateFeed(posts);
+  generateFeed([...posts, ...snippets]);
 
   return {
     props: { categories, posts },
