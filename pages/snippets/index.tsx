@@ -25,7 +25,7 @@ const getStaticProps = async () => {
   const categories = getAllCategories(snippets);
 
   return {
-    props: { categories, posts: latestTen },
+    props: { categories, snippets: latestTen },
   };
 };
 
