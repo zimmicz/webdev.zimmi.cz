@@ -22,7 +22,8 @@ const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeo
 
   React.useEffect(() => {
     const handler = () => {
-      if (scrollY.get() > 20) {
+      // prevent header flickering when going to mini mode
+      if (scrollY.get() > 200 || (scrollY.get() < 200 && scrollY.getPrevious() > 200)) {
         collapse();
       } else {
         expand();
@@ -30,7 +31,7 @@ const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeo
     };
 
     return scrollY.onChange(handler);
-  }, [expanded]);
+  }, []);
 
   return (
     <motion.header
