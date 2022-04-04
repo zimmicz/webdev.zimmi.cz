@@ -12,21 +12,24 @@ const getSourceOfFile = (fileName: string) => {
   return fs.readFileSync(path.join(POSTS_PATH, fileName));
 };
 
-const getAllPosts = async () => {
+const getPostsAndSnippets = async () => {
   const files = await globby(POSTS_PATH, {
     expandDirectories: {
       extensions: ['mdx'],
     },
   });
 
-  const posts = await Promise.all(
+  return Promise.all(
     files.map(async (fileName) => {
       const post = await getSinglePost(slugify(fileName));
       return post;
     }),
   );
+};
 
-  const published = posts.filter((post) => post.frontmatter.type === 'post' && post.frontmatter.status === 'published');
+const getPublished = async (type: 'post' | 'snippet') => {
+  const items = await getPostsAndSnippets();
+  const published = items.filter((item) => item.frontmatter.type === type && item.frontmatter.status === 'published');
   published.sort(sortByDate);
 
   return published;
@@ -84,4 +87,4 @@ const sortByDate = (a: Post, b: Post) => {
   return -1;
 };
 
-export { getAllCategories, getSinglePost, getSourceOfFile, getAllPosts };
+export { getPublished, getAllCategories, getSinglePost, getSourceOfFile, getPostsAndSnippets };

@@ -3,11 +3,11 @@ import { getPublished, getAllCategories, getSinglePost } from '../../lib/utils';
 import { Header, Layout, Post as PostComponent } from '../../components';
 
 type Props = {
-  post: PromiseReturnType<ReturnType<typeof getSinglePost>>;
+  snippet: PromiseReturnType<ReturnType<typeof getSinglePost>>;
   categories: PromiseReturnType<ReturnType<typeof getAllCategories>>;
 };
 
-const Post = ({ categories, post }: Props) => (
+const Snippet = ({ categories, snippet: post }: Props) => (
   <>
     <Header categories={categories} />
     <Layout>
@@ -17,7 +17,7 @@ const Post = ({ categories, post }: Props) => (
 );
 
 const getStaticProps = async ({ params }: { params: Pick<Post, 'slug'> }) => {
-  const posts = await getPublished('post');
+  const posts = await getPublished('snippet');
   const categories = getAllCategories(posts);
 
   const post = await getSinglePost(params.slug);
@@ -30,12 +30,12 @@ const getStaticProps = async ({ params }: { params: Pick<Post, 'slug'> }) => {
 };
 
 const getStaticPaths = async () => {
-  const paths = (await getPublished('post')).map(({ slug }) => ({ params: { slug } }));
+  const paths = (await getPublished('snippet')).map(({ slug }) => ({ params: { slug } }));
   return {
     paths,
     fallback: false,
   };
 };
 
-export default Post;
+export default Snippet;
 export { getStaticPaths, getStaticProps };

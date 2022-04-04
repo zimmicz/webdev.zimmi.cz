@@ -14,7 +14,7 @@ const Categories = ({ categories }: { categories: PromiseReturnType<ReturnType<t
       <AnimatedMenuPopover position={positionRight} className="z-10">
         <MenuItems className="font-bold flex flex-wrap gap-x-6 bg-white py-3 px-5 drop-shadow-sm transition-all transition-opacity">
           <div className="flex flex-col gap-y-2">
-            {leftColumn.map((category) => (
+            {leftColumn?.map((category) => (
               <ReachUIMenuLink key={category} as={MenuLink} href={`/categories/${category}`}>
                 {category}
               </ReachUIMenuLink>
@@ -22,7 +22,7 @@ const Categories = ({ categories }: { categories: PromiseReturnType<ReturnType<t
           </div>
 
           <div className="flex flex-col gap-y-2">
-            {rightColumn.map((category) => (
+            {rightColumn?.map((category) => (
               <ReachUIMenuLink key={category} as={MenuLink} href={`/categories/${category}`}>
                 {category}
               </ReachUIMenuLink>
