@@ -47,7 +47,7 @@ const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeo
     >
       <div className={content}>
         <motion.div animate={{ x: 0 }} initial={{ x: -50 }}>
-          <Link href="/">
+          <Link href="/" passHref>
             <a>
               <h1 className={title}>{BLOG_TITLE}</h1>
             </a>
@@ -75,9 +75,8 @@ const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeo
             <li className="self-center">
               <Menu>
                 <MenuButton
-                  className={`text-primary text-decoration-fade from-primary to-primary flex items-center space-x-3 py-2 ${
-                    expanded ? 'font-bold' : ''
-                  }`}
+                  className="font-bold text-primary text-decoration-fade from-primary to-primary flex items-center space-x-3 py-2
+                  "
                 >
                   <span>categories</span>
                   <ChevronDown className="my-icon-primary hidden sm:block self-end" />
@@ -102,11 +101,12 @@ const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeo
 
 const classNames = {
   mini: {
-    header: 'bg-gray-100 h-20 p-5 sticky top-0 z-10 w-full top-0 flex h-auto',
-    content: 'max-w-[100%] w-[90ch] flex mx-auto items-center flex-wrap md:flex-nowrap justify-between space-y-0',
-    title: 'text-xl',
-    description: 'text-gray-500 hidden md:block',
-    navigation: 'flex space-x-5',
+    header: 'bg-gray-100 h-20 p-5 sticky top-0 z-10 font-title font-bold w-full top-0 flex h-auto justify-center',
+    content:
+      'max-w-[100%] w-[90ch] flex mx-auto items-center flex-wrap md:flex-nowrap justify-center sm:justify-between space-y-0',
+    title: 'text-xl justify-center',
+    description: 'text-gray-500 font-normal hidden',
+    navigation: 'flex space-x-5 justify-center',
   },
   expanded: {
     header: 'bg-gray-100 p-5 md:py-10 sticky top-0 font-title font-bold w-full flex',
