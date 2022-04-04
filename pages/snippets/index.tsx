@@ -7,7 +7,7 @@ type Props = {
   categories: PromiseReturnType<ReturnType<typeof getAllCategories>>;
 };
 
-function Posts({ categories, snippets: posts }: Props) {
+function Snippets({ categories, snippets: posts }: Props) {
   return (
     <>
       <Header categories={categories} />
@@ -20,13 +20,14 @@ function Posts({ categories, snippets: posts }: Props) {
 }
 
 const getStaticProps = async () => {
-  const posts = (await getPublished('snippet')).slice(0, 10);
-  const categories = getAllCategories(posts);
+  const snippets = await getPublished('snippet');
+  const latestTen = snippets.slice(0, 10);
+  const categories = getAllCategories(snippets);
 
   return {
-    props: { categories, posts },
+    props: { categories, posts: latestTen },
   };
 };
 
-export default Posts;
+export default Snippets;
 export { getStaticProps };

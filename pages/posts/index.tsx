@@ -22,11 +22,12 @@ function Posts({ categories, posts }: Props) {
 }
 
 const getStaticProps = async () => {
-  const posts = (await getPublished('post')).slice(0, 10);
+  const posts = await getPublished('post');
+  const latestTen = posts.slice(0, 10);
   const categories = getAllCategories(posts);
 
   return {
-    props: { categories, posts },
+    props: { categories, posts: latestTen },
   };
 };
 
