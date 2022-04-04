@@ -20,10 +20,10 @@ const getStaticProps = async ({ params }: { params: Pick<Post, 'slug'> }) => {
   const posts = await getPublished('snippet');
   const categories = getAllCategories(posts);
 
-  const post = await getSinglePost(params.slug);
+  const snippet = await getSinglePost(params.slug);
   return {
     props: {
-      post,
+      snippet,
       categories,
     },
   };

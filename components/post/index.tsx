@@ -8,6 +8,7 @@ import { ReadingTime } from '../reading-time';
 import { withAnchor } from '../../hoc/anchor';
 
 const Post = (props: Post) => {
+  console.log('props', props);
   const Component = React.useMemo(() => getMDXComponent(props.code), [props.code]);
 
   return (
