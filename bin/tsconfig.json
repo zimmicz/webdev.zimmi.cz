@@ -1,0 +1,9 @@
+{
+    "extends": "../tsconfig.json",
+    "include": ["./write.ts"],
+    "compilerOptions": {
+        "module": "ESNext",
+        "outDir": "./dist",
+        "noEmit": false
+    }
+}

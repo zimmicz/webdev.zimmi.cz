@@ -1,12 +1,17 @@
+/// <reference types="../types" />
+
 import fs from 'fs';
 import path from 'path';
 import { globby } from 'globby';
 import readingTime from 'reading-time';
 import { bundleMDX } from 'mdx-bundler';
 import { remarkCodeHike } from '@code-hike/mdx';
-import theme from 'shiki/themes/dark-plus.json';
+//import theme from 'shiki/themes/dark-plus.json';
 import { POSTS_PATH } from '../config';
 import _ from 'lodash';
+import module from 'module';
+const require = module.createRequire(import.meta.url);
+const theme = require('shiki/themes/dark-plus.json');
 
 const getSourceOfFile = (fileName: string) => {
   return fs.readFileSync(path.join(POSTS_PATH, fileName));
