@@ -11,6 +11,8 @@ import { POSTS_PATH } from '../config';
 import _ from 'lodash';
 import module from 'module';
 const require = module.createRequire(import.meta.url);
+// require instead of import is used because of the npm `write` script
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const theme = require('shiki/themes/dark-plus.json');
 
 const getSourceOfFile = (fileName: string) => {
