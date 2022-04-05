@@ -15,10 +15,17 @@ image:
     width: 2592
     */
 
-inquirer.prompt([
+inquirer.prompt<{ title: string; type: Array<string>; categories: Array<string> }>([
   {
     name: 'title',
     type: 'input',
+    validate: (input) => {
+      if (input) {
+        return true;
+      }
+
+      return 'Please choose title';
+    },
   },
   {
     name: 'type',
@@ -33,5 +40,16 @@ inquirer.prompt([
         getPostsAndSnippets().then(getAllCategories).then(resolve);
       });
     },
+    validate: (input) => {
+      if (input.length > 0) {
+        return true;
+      }
+
+      return 'Please choose at least one category';
+    },
+  },
+  {
+    name: 'excerpt',
+    type: 'input',
   },
 ]);
