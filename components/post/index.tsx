@@ -6,6 +6,7 @@ import { Typography, WrittenAt } from '..';
 import { BannerImage } from '../banner-image';
 import { ReadingTime } from '../reading-time';
 import { withAnchor } from '../../hoc/anchor';
+import { PATHS } from '../../config';
 
 const Post = (props: Post) => {
   const Component = React.useMemo(() => getMDXComponent(props.code), [props.code]);
@@ -40,7 +41,7 @@ const Teaser = (props: Post) => (
 const BasePost = ({
   children,
   slug,
-  frontmatter: { publishedAt, categories, title },
+  frontmatter: { publishedAt, categories, title, type },
   readingTime,
 }: React.PropsWithChildren<Post>) => (
   <motion.section
@@ -49,7 +50,7 @@ const BasePost = ({
     className="rounded-lg leading-10 sm:leading-10 sm:text-base bg-white"
   >
     <Typography.H1 className="mb-5">
-      <Link href={`/posts/${slug}`}>
+      <Link href={`${type === 'post' ? PATHS.posts : PATHS.snippets}/${slug}`}>
         <a className="text-decoration-fade from-primary to-primary hover:text-primary pb-2">{title}</a>
       </Link>
     </Typography.H1>
