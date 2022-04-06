@@ -26,7 +26,7 @@ const Category = ({ category, categories, posts }: Props) => {
   );
 };
 
-const getStaticProps = async ({ params }: { params: { category: Props['categories'][number] } }) => {
+const getStaticProps = async ({ params }: { params: { category: Props['category'] } }) => {
   const posts = await getPublished('post');
   const filteredPosts = posts.filter((post) => post.frontmatter.categories.includes(params.category));
   const categories = await getAllCategories();
