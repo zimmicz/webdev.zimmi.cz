@@ -64,7 +64,9 @@ inquirer
       type: 'checkbox',
       choices: function () {
         return new Promise((resolve) => {
-          getPostsAndSnippets().then(getAllCategories).then(resolve);
+          getPostsAndSnippets()
+            .then(getAllCategories)
+            .then((categories) => resolve(categories.length === 0 ? ['none'] : categories));
         });
       },
       validate: (input) => {
