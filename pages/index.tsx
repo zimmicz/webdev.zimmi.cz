@@ -1,3 +1,5 @@
+import path from 'path';
+import fs from 'fs';
 import React from 'react';
 import { Layout, NoData, Teaser, Typography } from '../components';
 import { generateFeed } from '../lib/feed';
@@ -17,6 +19,7 @@ function Home({ items }: Props) {
 }
 
 const getStaticProps = async () => {
+  fs.readdirSync(path.resolve('lib/shiki'));
   const posts = await getPublished('post');
   const snippets = await getPublished('snippet');
   const latestPosts = takeLatest(posts);
