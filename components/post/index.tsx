@@ -70,22 +70,6 @@ const BasePost = ({
       </ul>
     </div>
     {children}
-    {/*
-    <div>
-      <Component
-        components={{
-          h2: withAnchor(Typography.H2),
-          h3: withAnchor(Typography.H3),
-          h4: withAnchor(Typography.H4),
-          h5: withAnchor(Typography.H5),
-          h6: withAnchor(Typography.H6),
-          p: Typography.Paragraph,
-          ol: Typography.Ol,
-          ul: Typography.Ul,
-        }}
-      />
-    </div>
-      */}
   </motion.section>
 );
 
