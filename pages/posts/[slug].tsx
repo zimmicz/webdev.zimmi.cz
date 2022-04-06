@@ -1,5 +1,5 @@
 import React from 'react';
-import { getPublished, getAllCategories, getSinglePost } from '../../lib/utils';
+import { getPublished, getAllCategories, getSinglePost, getCategoriesByType } from '../../lib/utils';
 import { Header, Layout, Post as PostComponent } from '../../components';
 
 type Props = {
@@ -17,8 +17,7 @@ const Post = ({ categories, post }: Props) => (
 );
 
 const getStaticProps = async ({ params }: { params: Pick<Post, 'slug'> }) => {
-  const posts = await getPublished('post');
-  const categories = getAllCategories(posts);
+  const categories = await getCategoriesByType('post');
 
   const post = await getSinglePost(params.slug);
   return {
@@ -30,7 +29,7 @@ const getStaticProps = async ({ params }: { params: Pick<Post, 'slug'> }) => {
 };
 
 const getStaticPaths = async () => {
-  const paths = (await getPublished('post')).map(({ slug }) => ({ params: { slug } }));
+  const paths = (await getPublished('post')).slice(0, 9).map(({ slug }) => ({ params: { slug } }));
   return {
     paths,
     fallback: false,

@@ -1,24 +1,23 @@
 import React from 'react';
-import { getPublished, getAllCategories, getSinglePost } from '../../lib/utils';
+import { getPublished, getSinglePost, getCategoriesByType } from '../../lib/utils';
 import { Header, Layout, Post as PostComponent } from '../../components';
 
 type Props = {
   snippet: PromiseReturnType<ReturnType<typeof getSinglePost>>;
-  categories: PromiseReturnType<ReturnType<typeof getAllCategories>>;
+  categories: PromiseReturnType<ReturnType<typeof getCategoriesByType>>;
 };
 
-const Snippet = ({ categories, snippet: post }: Props) => (
+const Snippet = ({ categories, snippet }: Props) => (
   <>
     <Header categories={categories} />
     <Layout>
-      <PostComponent {...post} />
+      <PostComponent {...snippet} />
     </Layout>
   </>
 );
 
 const getStaticProps = async ({ params }: { params: Pick<Post, 'slug'> }) => {
-  const posts = await getPublished('snippet');
-  const categories = getAllCategories(posts);
+  const categories = await getCategoriesByType('snippet');
 
   const snippet = await getSinglePost(params.slug);
   return {
@@ -30,10 +29,10 @@ const getStaticProps = async ({ params }: { params: Pick<Post, 'slug'> }) => {
 };
 
 const getStaticPaths = async () => {
-  const paths = (await getPublished('snippet')).map(({ slug }) => ({ params: { slug } }));
+  const paths = (await getPublished('snippet')).slice(0, 9).map(({ slug }) => ({ params: { slug } }));
   return {
     paths,
-    fallback: false,
+    fallback: 'blocking',
   };
 };
 

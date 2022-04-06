@@ -25,7 +25,7 @@ function Home({ categories, items }: Props) {
 const getStaticProps = async () => {
   const posts = await getPublished('post');
   const snippets = await getPublished('snippet');
-  const categories = getAllCategories([...posts, ...snippets]);
+  const categories = await getAllCategories();
   const latestPosts = posts.slice(0, 9);
   const latestSnippets = snippets.slice(0, 9);
   const latestItems = [...latestPosts, ...latestSnippets].sort(sortByDate);

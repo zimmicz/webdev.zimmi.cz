@@ -68,13 +68,26 @@ const getSinglePost = async (slug: string) => {
   };
 };
 
-const getAllCategories = (posts: Post[]) =>
-  _(posts)
-    .map((post) => _.result<string[]>(post, 'frontmatter.categories'))
+const getCategories = (items: Post[]) =>
+  _(items)
+    .map((item) => _.result<string[]>(item, 'frontmatter.categories'))
     .flatten()
     .uniq()
     .sort()
     .valueOf();
+
+const getAllCategories = async () => {
+  const posts = await getPublished('post');
+  const snippets = await getPublished('snippet');
+
+  return getCategories([...posts, ...snippets]);
+};
+
+const getCategoriesByType = async (type: 'post' | 'snippet') => {
+  const items = await getPublished(type);
+
+  return getCategories(items);
+};
 
 const slugify = (filepath: string) => {
   const result = filepath.replace(path.join(POSTS_PATH), '').replace('.mdx', '').split('/').reverse()[0];
@@ -88,4 +101,12 @@ const sortByDate = (a: Post, b: Post) => {
   return bDate - aDate;
 };
 
-export { sortByDate, getPublished, getAllCategories, getSinglePost, getSourceOfFile, getPostsAndSnippets };
+export {
+  getCategoriesByType,
+  sortByDate,
+  getPublished,
+  getAllCategories,
+  getSinglePost,
+  getSourceOfFile,
+  getPostsAndSnippets,
+};

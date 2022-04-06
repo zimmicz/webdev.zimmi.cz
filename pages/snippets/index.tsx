@@ -1,10 +1,10 @@
 import React from 'react';
 import { Header, Layout, Teaser, Typography } from '../../components';
-import { getPublished, getAllCategories } from '../../lib/utils';
+import { getPublished, getCategoriesByType } from '../../lib/utils';
 
 type Props = {
   snippets: PromiseReturnType<ReturnType<typeof getPublished>>;
-  categories: PromiseReturnType<ReturnType<typeof getAllCategories>>;
+  categories: PromiseReturnType<ReturnType<typeof getCategoriesByType>>;
 };
 
 function Snippets({ categories, snippets: posts }: Props) {
@@ -21,11 +21,11 @@ function Snippets({ categories, snippets: posts }: Props) {
 
 const getStaticProps = async () => {
   const snippets = await getPublished('snippet');
-  const latestTen = snippets.slice(0, 10);
-  const categories = getAllCategories(snippets);
+  const latest = snippets.slice(0, 9);
+  const categories = await getCategoriesByType('snippet');
 
   return {
-    props: { categories, snippets: latestTen },
+    props: { categories, snippets: latest },
   };
 };
 
