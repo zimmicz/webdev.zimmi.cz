@@ -1,18 +1,15 @@
 import React from 'react';
 import { getPublished, getSinglePost } from '../../lib/utils';
-import { Header, Layout, Post as PostComponent } from '../../components';
+import { Layout, Post as PostComponent } from '../../components';
 
 type Props = {
   post: PromiseReturnType<ReturnType<typeof getSinglePost>>;
 };
 
 const Post = ({ post }: Props) => (
-  <>
-    <Header />
-    <Layout>
-      <PostComponent {...post} />
-    </Layout>
-  </>
+  <Layout>
+    <PostComponent {...post} />
+  </Layout>
 );
 
 const getStaticProps = async ({ params }: { params: Pick<Post, 'slug'> }) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Layout, Teaser, Typography } from '../components';
+import { Layout, Teaser, Typography } from '../components';
 import { generateFeed } from '../lib/feed';
 import { getPublished, sortByDate, takeLatest } from '../lib/utils';
 
@@ -9,15 +9,12 @@ type Props = {
 
 function Home({ items }: Props) {
   return (
-    <>
-      <Header />
-      <Layout>
-        <Typography.H2 className="py-4">Latest</Typography.H2>
-        {items.map((item, index) => (
-          <Teaser key={index} {...item} />
-        ))}
-      </Layout>
-    </>
+    <Layout>
+      <Typography.H2 className="py-4">Latest</Typography.H2>
+      {items.map((item, index) => (
+        <Teaser key={index} {...item} />
+      ))}
+    </Layout>
   );
 }
 

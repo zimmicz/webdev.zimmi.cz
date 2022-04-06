@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Layout, Teaser, Typography } from '../../components';
+import { Layout, Teaser, Typography } from '../../components';
 import { getPublished, takeLatest } from '../../lib/utils';
 
 type Props = {
@@ -8,13 +8,10 @@ type Props = {
 
 function Snippets({ snippets: posts }: Props) {
   return (
-    <>
-      <Header />
-      <Layout>
-        <Typography.H2 className="py-4">Latest snippets</Typography.H2>
-        {posts ? posts.map((post, index) => <Teaser key={index} {...post} />) : 'not found'}
-      </Layout>
-    </>
+    <Layout>
+      <Typography.H2 className="py-4">Latest snippets</Typography.H2>
+      {posts ? posts.map((post, index) => <Teaser key={index} {...post} />) : 'not found'}
+    </Layout>
   );
 }
 

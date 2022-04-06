@@ -90,11 +90,15 @@ const Header = () => {
   );
 };
 
-const MyMenuLink = ({ children, ...props }: React.PropsWithChildren<unknown>) => (
-  <MenuLink className="flex items-center space-x-3 self-center" {...props}>
-    {children}
-  </MenuLink>
+const MyMenuLink = React.forwardRef(
+  ({ children, ...props }: React.PropsWithChildren<unknown>, ref: React.Ref<HTMLAnchorElement>) => (
+    <MenuLink ref={ref} className="flex items-center space-x-3 self-center" {...props}>
+      {children}
+    </MenuLink>
+  ),
 );
+
+MyMenuLink.displayName = 'MyMenuLink';
 
 const MyMenuButton = ({
   renderButton,
