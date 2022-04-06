@@ -12,7 +12,7 @@ import _ from 'lodash';
 //const require = module.createRequire(import.meta.url);
 // require instead of import is used because of the npm `write` script
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const theme = require('shiki/themes/dark-plus.json');
+import theme from 'shiki/themes/dark-plus.json';
 
 const cache: Record<'posts' | 'snippets', Post[] | null> & { categories: string[] | null } = {
   posts: null,
