@@ -7,6 +7,7 @@ const BackToTop = () => {
   const [on, { setOn, setOff }] = useToggle(false);
 
   const handler = React.useCallback(() => {
+    console.log('handler');
     if (window.scrollY > window.innerHeight / 3) {
       setOn();
     } else {
@@ -14,7 +15,7 @@ const BackToTop = () => {
     }
   }, []);
 
-  const scrollToTop = () => window.scrollTo({ top: 0 });
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   React.useLayoutEffect(handler, []);
 
