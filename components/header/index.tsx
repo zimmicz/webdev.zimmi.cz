@@ -45,10 +45,11 @@ const Header = () => {
   }, []);
 
   React.useEffect(() => {
-    menuControls.set({ opacity: 0 });
+    menuControls.set((i) => ({ opacity: 0, x: i * 10 }));
     menuControls.start((i) => ({
       opacity: 1,
-      transition: { duration: i * 0.5, ease: 'easeOut' },
+      x: 0,
+      transition: { duration: i * 0.2, ease: 'easeOut' },
     }));
   }, []);
 
