@@ -45,7 +45,6 @@ const getPublished = async (type: 'post' | 'snippet') => {
   const cached = cache[cacheKey];
 
   if (cached) {
-    console.log('using cache', cached.length);
     return cached;
   }
 

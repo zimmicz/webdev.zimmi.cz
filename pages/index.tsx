@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Teaser, Typography } from '../components';
+import { Layout, NoData, Teaser, Typography } from '../components';
 import { generateFeed } from '../lib/feed';
 import { getPublished, sortByDate, takeLatest } from '../lib/utils';
 
@@ -11,9 +11,7 @@ function Home({ items }: Props) {
   return (
     <Layout>
       <Typography.H2 className="py-4">Latest</Typography.H2>
-      {items.map((item, index) => (
-        <Teaser key={index} {...item} />
-      ))}
+      {items.length === 0 ? <NoData /> : items.map((item, index) => <Teaser key={index} {...item} />)}
     </Layout>
   );
 }

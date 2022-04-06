@@ -28,8 +28,11 @@ const H6 = ({ children }: React.PropsWithChildren<unknown>) => {
   return <h6 className={`${common.heading} lg:text-6xl`}>{children}</h6>;
 };
 
-const Paragraph = ({ children }: React.PropsWithChildren<unknown>) => {
-  return <p className="my-5 sm:text-lg">{children}</p>;
+const Paragraph = ({
+  children,
+  className,
+}: React.PropsWithChildren<Partial<Pick<HTMLParagraphElement, 'className'>>>) => {
+  return <p className={`my-5 sm:text-lg ${className}`}>{children}</p>;
 };
 
 const Ul = ({ children }: React.PropsWithChildren<unknown>) => {
