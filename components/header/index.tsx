@@ -121,19 +121,22 @@ const MyMenuButton = ({
 
 const menuLinks = [
   <Link key={PATHS.posts} href={PATHS.posts} passHref>
+    {/*// @ts-expect-error types */}
     <MyMenuLink>
       <span>posts</span>
       <FileText className="my-icon-primary hidden sm:block" />
     </MyMenuLink>
   </Link>,
   <Link key={PATHS.snippets} href={PATHS.snippets} passHref>
-    <MyMenuLink key="snippets">
+    {/*// @ts-expect-error types */}
+    <MyMenuLink>
       <span>snippets</span>
       <Code className="my-icon-primary self-end hidden sm:block" />
     </MyMenuLink>
   </Link>,
   <Link key={PATHS.rss} href={PATHS.rss} passHref>
-    <MyMenuLink key="rss">
+    {/*// @ts-expect-error types */}
+    <MyMenuLink>
       <span>rss</span>
       <Rss className="my-icon-primary hidden sm:block" />
     </MyMenuLink>
