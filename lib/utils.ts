@@ -7,8 +7,8 @@ import readingTime from 'reading-time';
 import { bundleMDX } from 'mdx-bundler';
 import { remarkCodeHike } from '@code-hike/mdx';
 //import theme from 'shiki/themes/dark-plus.json';
-import { POSTS_PATH } from '../config';
-import _ from 'lodash';
+import { LATEST_NUMBER, POSTS_PATH } from '../config';
+import _, { List } from 'lodash';
 import module from 'module';
 const require = module.createRequire(import.meta.url);
 // require instead of import is used because of the npm `write` script
@@ -89,6 +89,8 @@ const getCategoriesByType = async (type: 'post' | 'snippet') => {
   return getCategories(items);
 };
 
+const takeLatest = (items: Post[]) => _.take(items, LATEST_NUMBER);
+
 const slugify = (filepath: string) => {
   const result = filepath.replace(path.join(POSTS_PATH), '').replace('.mdx', '').split('/').reverse()[0];
   return result;
@@ -109,4 +111,5 @@ export {
   getSinglePost,
   getSourceOfFile,
   getPostsAndSnippets,
+  takeLatest,
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header, Layout, Teaser, Typography } from '../components';
 import { generateFeed } from '../lib/feed';
-import { getPublished, getAllCategories, sortByDate } from '../lib/utils';
+import { getPublished, getAllCategories, sortByDate, takeLatest } from '../lib/utils';
 
 type Props = {
   items: PromiseReturnType<ReturnType<typeof getPublished>>;
@@ -26,8 +26,8 @@ const getStaticProps = async () => {
   const posts = await getPublished('post');
   const snippets = await getPublished('snippet');
   const categories = await getAllCategories();
-  const latestPosts = posts.slice(0, 9);
-  const latestSnippets = snippets.slice(0, 9);
+  const latestPosts = takeLatest(posts);
+  const latestSnippets = takeLatest(snippets);
   const latestItems = [...latestPosts, ...latestSnippets].sort(sortByDate);
 
   generateFeed(latestItems);

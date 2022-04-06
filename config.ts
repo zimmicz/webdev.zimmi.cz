@@ -10,5 +10,6 @@ const PATHS = {
   snippets: '/snippets',
   rss: '/feed.xml',
 };
+const LATEST_NUMBER = 10;
 
-export { BLOG_TITLE, BLOG_DESCRIPTION, POSTS_PATH, BLOG_URL, PATHS };
+export { BLOG_TITLE, BLOG_DESCRIPTION, POSTS_PATH, BLOG_URL, PATHS, LATEST_NUMBER };
