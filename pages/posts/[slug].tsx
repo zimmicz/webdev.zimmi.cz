@@ -1,15 +1,14 @@
 import React from 'react';
-import { getPublished, getAllCategories, getSinglePost } from '../../lib/utils';
+import { getPublished, getSinglePost } from '../../lib/utils';
 import { Header, Layout, Post as PostComponent } from '../../components';
 
 type Props = {
   post: PromiseReturnType<ReturnType<typeof getSinglePost>>;
-  categories: PromiseReturnType<ReturnType<typeof getAllCategories>>;
 };
 
-const Post = ({ categories, post }: Props) => (
+const Post = ({ post }: Props) => (
   <>
-    <Header categories={categories} />
+    <Header />
     <Layout>
       <PostComponent {...post} />
     </Layout>
@@ -17,13 +16,10 @@ const Post = ({ categories, post }: Props) => (
 );
 
 const getStaticProps = async ({ params }: { params: Pick<Post, 'slug'> }) => {
-  const categories = await getAllCategories();
-
   const post = await getSinglePost(params.slug);
   return {
     props: {
       post,
-      categories,
     },
   };
 };

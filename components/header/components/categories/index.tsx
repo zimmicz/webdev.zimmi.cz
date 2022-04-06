@@ -1,13 +1,22 @@
 import React from 'react';
 import _ from 'lodash';
 import Link from 'next/link';
-import type { getAllCategories } from '../../../../lib/utils';
 import { MenuItems, MenuLink as ReachUIMenuLink, MenuPopover } from '@reach/menu-button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { positionRight } from '@reach/popover';
 import { MenuLink } from '../../../';
 
-const Categories = ({ categories }: { categories: PromiseReturnType<ReturnType<typeof getAllCategories>> }) => {
+const Categories = () => {
+  const [categories, setCategories] = React.useState<string[]>([]);
+
+  React.useEffect(() => {
+    fetch('/api/categories')
+      .then((response) => response.json())
+      .then((json) => {
+        setCategories(json);
+      });
+  }, []);
+
   const pivot = _.ceil(categories.length / 2);
   const [leftColumn, rightColumn] = _.chunk(categories, pivot);
   return (

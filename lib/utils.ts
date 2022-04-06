@@ -15,6 +15,12 @@ const require = module.createRequire(import.meta.url);
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const theme = require('shiki/themes/dark-plus.json');
 
+const cache: Record<'posts' | 'snippets', Post[] | null> & { categories: string[] | null } = {
+  posts: null,
+  snippets: null,
+  categories: null,
+};
+
 const getSourceOfFile = (fileName: string) => {
   return fs.readFileSync(path.join(POSTS_PATH, fileName));
 };
@@ -35,9 +41,18 @@ const getPostsAndSnippets = async () => {
 };
 
 const getPublished = async (type: 'post' | 'snippet') => {
+  const cacheKey = type === 'post' ? 'posts' : 'snippets';
+  const cached = cache[cacheKey];
+
+  if (cached) {
+    console.log('using cache', cached.length);
+    return cached;
+  }
+
   const items = await getPostsAndSnippets();
   const published = items.filter((item) => item.frontmatter.type === type && item.frontmatter.status === 'published');
   published.sort(sortByDate);
+  cache[cacheKey] = published;
 
   return published;
 };

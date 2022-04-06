@@ -7,7 +7,6 @@ const BackToTop = () => {
   const [on, { setOn, setOff }] = useToggle(false);
 
   const handler = React.useCallback(() => {
-    console.log('handler');
     if (window.scrollY > window.innerHeight / 3) {
       setOn();
     } else {

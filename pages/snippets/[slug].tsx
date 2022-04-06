@@ -1,15 +1,14 @@
 import React from 'react';
-import { getPublished, getSinglePost, getAllCategories } from '../../lib/utils';
+import { getPublished, getSinglePost, getAllCategories, takeLatest } from '../../lib/utils';
 import { Header, Layout, Post as PostComponent } from '../../components';
 
 type Props = {
   snippet: PromiseReturnType<ReturnType<typeof getSinglePost>>;
-  categories: PromiseReturnType<ReturnType<typeof getAllCategories>>;
 };
 
-const Snippet = ({ categories, snippet }: Props) => (
+const Snippet = ({ snippet }: Props) => (
   <>
-    <Header categories={categories} />
+    <Header />
     <Layout>
       <PostComponent {...snippet} />
     </Layout>
@@ -17,19 +16,17 @@ const Snippet = ({ categories, snippet }: Props) => (
 );
 
 const getStaticProps = async ({ params }: { params: Pick<Post, 'slug'> }) => {
-  const categories = await getAllCategories();
-
   const snippet = await getSinglePost(params.slug);
+
   return {
     props: {
       snippet,
-      categories,
     },
   };
 };
 
 const getStaticPaths = async () => {
-  const paths = (await getPublished('snippet')).slice(0, 9).map(({ slug }) => ({ params: { slug } }));
+  const paths = takeLatest(await getPublished('snippet')).map(({ slug }) => ({ params: { slug } }));
   return {
     paths,
     fallback: 'blocking',

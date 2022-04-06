@@ -9,10 +9,9 @@ import ChevronDown from '../../public/icons/chevron-down.svg';
 import { BLOG_TITLE, BLOG_DESCRIPTION, PATHS } from '../../config';
 import { useToggle } from '../../hooks';
 import { Menu, MenuButton } from '@reach/menu-button';
-import type { getAllCategories } from '../../lib/utils';
 import { Categories } from './components/categories';
 
-const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeof getAllCategories>> }) => {
+const Header = () => {
   const { scrollY } = useViewportScroll();
   const menuControls = useAnimation();
   const [expanded, { setOn: expand, setOff: collapse }] = useToggle(true);
@@ -27,7 +26,7 @@ const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeo
           <ChevronDown className="my-icon-primary hidden sm:block self-end" />
         </>
       }
-      renderContent={<Categories categories={categories} />}
+      renderContent={<Categories />}
     />,
     ...menuLinks.slice(2),
   ];

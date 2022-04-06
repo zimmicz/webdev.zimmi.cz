@@ -1,16 +1,15 @@
 import React from 'react';
 import { Header, Layout, Teaser, Typography } from '../../components';
-import { getPublished, getAllCategories } from '../../lib/utils';
+import { getPublished, takeLatest } from '../../lib/utils';
 
 type Props = {
   snippets: PromiseReturnType<ReturnType<typeof getPublished>>;
-  categories: PromiseReturnType<ReturnType<typeof getAllCategories>>;
 };
 
-function Snippets({ categories, snippets: posts }: Props) {
+function Snippets({ snippets: posts }: Props) {
   return (
     <>
-      <Header categories={categories} />
+      <Header />
       <Layout>
         <Typography.H2 className="py-4">Latest snippets</Typography.H2>
         {posts ? posts.map((post, index) => <Teaser key={index} {...post} />) : 'not found'}
@@ -21,11 +20,10 @@ function Snippets({ categories, snippets: posts }: Props) {
 
 const getStaticProps = async () => {
   const snippets = await getPublished('snippet');
-  const latest = snippets.slice(0, 9);
-  const categories = await getAllCategories();
+  const latest = takeLatest(snippets);
 
   return {
-    props: { categories, snippets: latest },
+    props: { snippets: latest },
   };
 };
 

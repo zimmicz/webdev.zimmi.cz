@@ -4,20 +4,11 @@
         <title>Michal Zimmermann</title>
         <link>https://webdev.zimmi.cz</link>
         <description>Pieces of knowledge from the world of web development.</description>
-        <lastBuildDate>Wed, 06 Apr 2022 08:21:09 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 06 Apr 2022 10:21:48 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <copyright>hello</copyright>
-        <item>
-            <title><![CDATA[Hello world]]></title>
-            <link>https://webdev.zimmi.cz/posts/hello-world</link>
-            <guid>https://webdev.zimmi.cz/posts/hello-world</guid>
-            <pubDate>Wed, 06 Apr 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Hello world]]></description>
-            <content:encoded><![CDATA[<p class="my-5 sm:text-lg">hello world</p>]]></content:encoded>
-            <author>zimmicz@gmail.com (Michal Zimmermann)</author>
-        </item>
         <item>
             <title><![CDATA[Fourth post]]></title>
             <link>https://webdev.zimmi.cz/posts/fourth-post</link>

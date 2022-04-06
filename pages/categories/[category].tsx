@@ -5,14 +5,13 @@ import Tag from '../../public/icons/tag.svg';
 
 type Props = {
   posts: PromiseReturnType<ReturnType<typeof getPublished>>;
-  categories: PromiseReturnType<ReturnType<typeof getAllCategories>>;
-  category: Props['categories'][number];
+  category: Post['frontmatter']['categories'][number];
 };
 
-const Category = ({ category, categories, posts }: Props) => {
+const Category = ({ category, posts }: Props) => {
   return (
     <>
-      <Header categories={categories} />
+      <Header />
       <Layout>
         <Typography.H2 className="py-4 capitalize flex items-center space-x-2">
           <span>{category}</span>
@@ -29,12 +28,10 @@ const Category = ({ category, categories, posts }: Props) => {
 const getStaticProps = async ({ params }: { params: { category: Props['category'] } }) => {
   const posts = await getPublished('post');
   const filteredPosts = posts.filter((post) => post.frontmatter.categories.includes(params.category));
-  const categories = await getAllCategories();
 
   return {
     props: {
       posts: filteredPosts,
-      categories,
       category: params.category,
     },
   };
