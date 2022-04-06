@@ -20,12 +20,7 @@ image:
     width: 2592
     */
 
-type Answers = {
-  title: Post['frontmatter']['title'];
-  type: Post['frontmatter']['type'];
-  categories: Post['frontmatter']['categories'];
-  excerpt: Post['frontmatter']['excerpt'];
-};
+type Answers = Pick<Post['frontmatter'], 'title' | 'type' | 'categories' | 'excerpt'>;
 
 const handleAnswers = async (answers: Answers) => {
   const foldername = _.kebabCase(answers.title);
