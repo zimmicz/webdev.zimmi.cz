@@ -8,7 +8,7 @@ import { bundleMDX } from 'mdx-bundler';
 import { remarkCodeHike } from '@code-hike/mdx';
 //import theme from 'shiki/themes/dark-plus.json';
 import { LATEST_NUMBER, POSTS_PATH } from '../config';
-import _, { List } from 'lodash';
+import _ from 'lodash';
 import module from 'module';
 const require = module.createRequire(import.meta.url);
 // require instead of import is used because of the npm `write` script
@@ -83,12 +83,6 @@ const getAllCategories = async () => {
   return getCategories([...posts, ...snippets]);
 };
 
-const getCategoriesByType = async (type: 'post' | 'snippet') => {
-  const items = await getPublished(type);
-
-  return getCategories(items);
-};
-
 const takeLatest = (items: Post[]) => _.take(items, LATEST_NUMBER);
 
 const slugify = (filepath: string) => {
@@ -103,13 +97,4 @@ const sortByDate = (a: Post, b: Post) => {
   return bDate - aDate;
 };
 
-export {
-  getCategoriesByType,
-  sortByDate,
-  getPublished,
-  getAllCategories,
-  getSinglePost,
-  getSourceOfFile,
-  getPostsAndSnippets,
-  takeLatest,
-};
+export { sortByDate, getPublished, getAllCategories, getSinglePost, getSourceOfFile, getPostsAndSnippets, takeLatest };

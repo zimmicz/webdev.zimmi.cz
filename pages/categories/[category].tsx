@@ -1,11 +1,11 @@
 import React from 'react';
 import { Header, Layout, Teaser, Typography } from '../../components';
-import { getPublished, getAllCategories, getCategoriesByType } from '../../lib/utils';
+import { getPublished, getAllCategories } from '../../lib/utils';
 import Tag from '../../public/icons/tag.svg';
 
 type Props = {
   posts: PromiseReturnType<ReturnType<typeof getPublished>>;
-  categories: PromiseReturnType<ReturnType<typeof getCategoriesByType>>;
+  categories: PromiseReturnType<ReturnType<typeof getAllCategories>>;
   category: Props['categories'][number];
 };
 
@@ -41,7 +41,7 @@ const getStaticProps = async ({ params }: { params: { category: Props['categorie
 };
 
 const getStaticPaths = async () => {
-  const paths = (await getCategoriesByType('post')).map((category) => `/categories/${category}`);
+  const paths = (await getAllCategories()).map((category) => `/categories/${category}`);
   return {
     paths,
     fallback: false,
