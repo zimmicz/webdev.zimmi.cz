@@ -34,7 +34,7 @@ const handleAnswers = async (answers: Answers) => {
   const date = new Date();
   const metadata: Post['frontmatter'] = {
     ...answers,
-    publishedAt: `'${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}'`,
+    publishedAt: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
     status: 'draft',
   };
   await fs.mkdir(folder);
