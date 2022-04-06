@@ -1,4 +1,4 @@
-import { motion, useViewportScroll } from 'framer-motion';
+import { motion, useAnimation, useViewportScroll } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
 import { MenuLink } from '..';
@@ -6,7 +6,7 @@ import FileText from '../../public/icons/file-text.svg';
 import Code from '../../public/icons/code.svg';
 import Rss from '../../public/icons/rss.svg';
 import ChevronDown from '../../public/icons/chevron-down.svg';
-import { BLOG_TITLE, BLOG_DESCRIPTION } from '../../config';
+import { BLOG_TITLE, BLOG_DESCRIPTION, PATHS } from '../../config';
 import { useToggle } from '../../hooks';
 import { Menu, MenuButton } from '@reach/menu-button';
 import type { getAllCategories } from '../../lib/utils';
@@ -14,8 +14,23 @@ import { Categories } from './components/categories';
 
 const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeof getAllCategories>> }) => {
   const { scrollY } = useViewportScroll();
+  const menuControls = useAnimation();
   const [expanded, { setOn: expand, setOff: collapse }] = useToggle(true);
   const { navigation, header, content, title, description } = expanded ? classNames.expanded : classNames.mini;
+  const menuItems = [
+    ...menuLinks.slice(0, 2),
+    <MyMenuButton
+      key="categories"
+      renderButton={
+        <>
+          <span>categories</span>
+          <ChevronDown className="my-icon-primary hidden sm:block self-end" />
+        </>
+      }
+      renderContent={<Categories categories={categories} />}
+    />,
+    ...menuLinks.slice(2),
+  ];
 
   React.useEffect(() => {
     const handler = () => {
@@ -28,6 +43,14 @@ const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeo
     };
 
     return scrollY.onChange(handler);
+  }, []);
+
+  React.useEffect(() => {
+    menuControls.set({ opacity: 0 });
+    menuControls.start((i) => ({
+      opacity: 1,
+      transition: { duration: i * 0.5, ease: 'easeOut' },
+    }));
   }, []);
 
   return (
@@ -46,58 +69,72 @@ const Header = ({ categories }: { categories: PromiseReturnType<ReturnType<typeo
       className={`${header} sticky top-0`}
     >
       <div className={content}>
-        <motion.div animate={{ x: 0 }} initial={{ x: -50 }}>
+        <div>
           <Link href="/" passHref>
             <a>
               <h1 className={title}>{BLOG_TITLE}</h1>
             </a>
           </Link>
           <p className={description}>{BLOG_DESCRIPTION}</p>
-        </motion.div>
+        </div>
         <nav className="md:ml-auto w-full sm:w-auto">
           <ul className={navigation}>
-            <li>
-              <Link href="/posts" passHref>
-                <MenuLink className="flex items-center space-x-3 self-center">
-                  <span>posts</span>
-                  <FileText className="my-icon-primary hidden sm:block" />
-                </MenuLink>
-              </Link>
-            </li>
-            <li>
-              <Link href="/snippets" passHref>
-                <MenuLink className="flex items-center space-x-3 self-center">
-                  <span>snippets</span>
-                  <Code className="my-icon-primary self-end hidden sm:block" />
-                </MenuLink>
-              </Link>
-            </li>
-            <li className="self-center">
-              <Menu>
-                <MenuButton
-                  className="font-bold text-primary text-decoration-fade from-primary to-primary flex items-center space-x-3 py-2
-                  "
-                >
-                  <span>categories</span>
-                  <ChevronDown className="my-icon-primary hidden sm:block self-end" />
-                </MenuButton>
-                <Categories categories={categories} />
-              </Menu>
-            </li>
-            <li>
-              <Link href="/feed.xml" passHref>
-                <MenuLink className="flex items-center space-x-3 self-center">
-                  <span>rss</span>
-                  <Rss className="my-icon-primary hidden sm:block" />
-                </MenuLink>
-              </Link>
-            </li>
+            {menuItems.map((item, i) => (
+              <motion.li key={i} custom={i} animate={menuControls}>
+                {item}
+              </motion.li>
+            ))}
           </ul>
         </nav>
       </div>
     </motion.header>
   );
 };
+
+const MyMenuLink = ({ children, ...props }: React.PropsWithChildren<unknown>) => (
+  <MenuLink className="flex items-center space-x-3 self-center" {...props}>
+    {children}
+  </MenuLink>
+);
+
+const MyMenuButton = ({
+  renderButton,
+  renderContent,
+}: {
+  renderButton: React.ReactNode;
+  renderContent: React.ReactNode;
+}) => (
+  <Menu>
+    <MenuButton
+      className="font-bold text-primary text-decoration-fade from-primary to-primary flex items-center space-x-3 py-2
+                  "
+    >
+      {renderButton}
+    </MenuButton>
+    {renderContent}
+  </Menu>
+);
+
+const menuLinks = [
+  <Link key={PATHS.posts} href={PATHS.posts} passHref>
+    <MyMenuLink>
+      <span>posts</span>
+      <FileText className="my-icon-primary hidden sm:block" />
+    </MyMenuLink>
+  </Link>,
+  <Link key={PATHS.snippets} href={PATHS.snippets} passHref>
+    <MyMenuLink key="snippets">
+      <span>snippets</span>
+      <Code className="my-icon-primary self-end hidden sm:block" />
+    </MyMenuLink>
+  </Link>,
+  <Link key={PATHS.rss} href={PATHS.rss} passHref>
+    <MyMenuLink key="rss">
+      <span>rss</span>
+      <Rss className="my-icon-primary hidden sm:block" />
+    </MyMenuLink>
+  </Link>,
+];
 
 const classNames = {
   mini: {
