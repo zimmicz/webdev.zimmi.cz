@@ -12,8 +12,6 @@ const MenuLink = React.forwardRef(
     return (
       <motion.a
         ref={ref}
-        animate={{ x: 0 }}
-        initial={{ x: 50 }}
         onClick={onClick}
         href={href?.toString()}
         className={`${className} py-2 text-primary text-decoration-fade from-primary to-primary`}
