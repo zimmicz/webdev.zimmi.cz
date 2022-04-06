@@ -9,7 +9,11 @@ const PATHS = {
   posts: '/posts',
   snippets: '/snippets',
   rss: '/feed.xml',
+  categories: '/categories',
+};
+const API_ROUTES = {
+  categories: '/api/categories',
 };
 const LATEST_NUMBER = 10;
 
-export { BLOG_TITLE, BLOG_DESCRIPTION, POSTS_PATH, BLOG_URL, PATHS, LATEST_NUMBER };
+export { API_ROUTES, BLOG_TITLE, BLOG_DESCRIPTION, POSTS_PATH, BLOG_URL, PATHS, LATEST_NUMBER };

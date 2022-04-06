@@ -5,12 +5,13 @@ import { MenuItems, MenuLink as ReachUIMenuLink, MenuPopover } from '@reach/menu
 import { AnimatePresence, motion } from 'framer-motion';
 import { positionRight } from '@reach/popover';
 import { MenuLink } from '../../../';
+import { API_ROUTES, PATHS } from '../../../../config';
 
 const Categories = () => {
   const [categories, setCategories] = React.useState<string[]>([]);
 
   React.useEffect(() => {
-    fetch('/api/categories')
+    fetch(API_ROUTES.categories)
       .then((response) => response.json())
       .then((json) => {
         setCategories(json);
@@ -33,7 +34,7 @@ const Categories = () => {
 
           <div className="flex flex-col gap-y-2">
             {rightColumn?.map((category) => (
-              <Link href={`/categories/${category}`} passHref key={category}>
+              <Link href={`${PATHS.categories}/${category}`} passHref key={category}>
                 <ReachUIMenuLink as={MenuLink}>{category}</ReachUIMenuLink>
               </Link>
             ))}
