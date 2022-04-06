@@ -1,0 +1,40 @@
+---
+title: Using mapped types to access object properties
+type: snippet
+categories:
+  - none
+excerpt: Once in a while, I struggle to work with objects containing different types of property values now and then. Yet, using mapped types, it is a piece of cake.
+publishedAt: 2022-4-6
+status: draft
+
+---
+
+```js
+type Configuration = {
+  'one': number;
+  'two': string[];
+  'three': () => void;
+}
+
+// ✅ right
+const fn = (what: { [key in keyof Configuration ]: Configuration[key]}) => {
+  if (what.one) {
+    what.one.toFixed();
+  }
+
+  if (what.two) {
+    what.two.slice(0, 1);
+  }
+
+  if (what.three) {
+    what.three();
+  }
+}
+
+// ❌ wrong
+const fn2 = (what: Record<Key, Configuration[Key]>) => {
+  if (what.one) {
+    what.one.toFixed();
+  }
+}
+```
