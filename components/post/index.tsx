@@ -33,21 +33,22 @@ const Post = (props: Post) => {
 };
 
 const Teaser = (props: Post) => (
-  <BasePost {...props}>
+  <BasePost {...props} className="mb-14">
     <Typography.Paragraph>{props.frontmatter.excerpt}</Typography.Paragraph>
   </BasePost>
 );
 
 const BasePost = ({
+  className,
   children,
   slug,
   frontmatter: { publishedAt, categories, title, type },
   readingTime,
-}: React.PropsWithChildren<Post>) => (
+}: React.PropsWithChildren<Post & { className?: string }>) => (
   <motion.section
     initial="rest"
     whileHover="hover"
-    className="rounded-lg leading-10 sm:leading-10 sm:text-base bg-white"
+    className={`rounded-lg leading-10 sm:leading-10 sm:text-base bg-white ${className}`}
   >
     <Typography.H1 className="mb-5">
       <Link href={`${type === 'post' ? PATHS.posts : PATHS.snippets}/${slug}`}>

@@ -64,7 +64,7 @@ const Header = () => {
         },
       }}
       animate="mini"
-      transition={{ duration: 0.25, type: 'spring' }}
+      transition={{ duration: 0.75, type: 'spring' }}
       initial={false}
       className={`${header} sticky top-0`}
     >

@@ -1,10 +1,11 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import React from 'react';
 import { useToggle } from '../../hooks';
 import ArrowUpCircle from '../../public/icons/arrow-up.svg';
 
 const BackToTop = () => {
   const [on, { setOn, setOff }] = useToggle(false);
+  const shouldReduceMotion = useReducedMotion();
 
   const handler = React.useCallback(() => {
     if (window.scrollY > window.innerHeight / 3) {
@@ -14,7 +15,7 @@ const BackToTop = () => {
     }
   }, []);
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: shouldReduceMotion ? 'auto' : 'smooth' });
 
   React.useLayoutEffect(handler, []);
 
@@ -30,7 +31,7 @@ const BackToTop = () => {
           onClick={scrollToTop}
           title="Back to top"
           exit={{ scale: 0 }}
-          initial={{ y: 100 }}
+          initial={{ y: shouldReduceMotion ? 0 : 100 }}
           animate={{ y: 0 }}
           className="fixed right-28 bottom-12"
         >
