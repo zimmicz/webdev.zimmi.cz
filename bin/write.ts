@@ -1,5 +1,10 @@
+import path from 'node:path';
+import fs from 'node:fs/promises';
 import inquirer from 'inquirer';
 import { getAllCategories, getPostsAndSnippets } from '../lib/utils';
+import _ from 'lodash';
+import { POSTS_PATH } from '../config';
+import yaml from 'js-yaml';
 
 /*
 status: published
@@ -15,8 +20,34 @@ image:
     width: 2592
     */
 
+type Answers = {
+  title: Post['frontmatter']['title'];
+  type: Post['frontmatter']['type'];
+  categories: Post['frontmatter']['categories'];
+  excerpt: Post['frontmatter']['excerpt'];
+};
+
+const handleAnswers = async (answers: Answers) => {
+  const foldername = _.kebabCase(answers.title);
+  const folder = path.join(POSTS_PATH, foldername);
+  const file = path.join(folder, `${foldername}.mdx`);
+  const date = new Date();
+  const metadata: Post['frontmatter'] = {
+    ...answers,
+    publishedAt: `'${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}'`,
+    status: 'draft',
+  };
+  await fs.mkdir(folder);
+  await fs.writeFile(
+    file,
+    `---
+${yaml.dump(metadata)}
+---`,
+  );
+};
+
 inquirer
-  .prompt<{ title: string; type: Array<string>; categories: Array<string>; excerpt: string }>([
+  .prompt<Answers>([
     {
       name: 'title',
       type: 'input',
@@ -54,6 +85,4 @@ inquirer
       type: 'input',
     },
   ])
-  .then((answers) => {
-    console.log(answers);
-  });
+  .then(handleAnswers);

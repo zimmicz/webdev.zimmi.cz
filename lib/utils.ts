@@ -82,16 +82,10 @@ const slugify = (filepath: string) => {
 };
 
 const sortByDate = (a: Post, b: Post) => {
-  const aDate = new Date(a.frontmatter.publishedAt);
-  const bDate = new Date(b.frontmatter.publishedAt);
+  const aDate = new Date(a.frontmatter.publishedAt).valueOf();
+  const bDate = new Date(b.frontmatter.publishedAt).valueOf();
 
-  if (aDate === bDate) {
-    return 0;
-  } else if (aDate > bDate) {
-    return 1;
-  }
-
-  return -1;
+  return bDate - aDate;
 };
 
-export { getPublished, getAllCategories, getSinglePost, getSourceOfFile, getPostsAndSnippets };
+export { sortByDate, getPublished, getAllCategories, getSinglePost, getSourceOfFile, getPostsAndSnippets };
