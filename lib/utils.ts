@@ -8,11 +8,8 @@ import { bundleMDX } from 'mdx-bundler';
 import { remarkCodeHike } from '@code-hike/mdx';
 import { LATEST_NUMBER, POSTS_PATH } from '../config';
 import _ from 'lodash';
-//import module from 'module';
-//const require = module.createRequire(import.meta.url);
-// require instead of import is used because of the npm `write` script
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-import theme from './shiki/themes/dark-plus.json';
+import { loadTheme } from 'shiki';
+const theme = loadTheme(path.resolve('lib/shiki/themes/dark-plus.json'));
 
 const cache: Record<'posts' | 'snippets', Post[] | null> & { categories: string[] | null } = {
   posts: null,
@@ -57,10 +54,11 @@ const getPublished = async (type: 'post' | 'snippet') => {
 
 const getSinglePost = async (slug: string) => {
   const source = getSourceOfFile(slug + '/' + slug + '.mdx').toString();
+  const myTheme = await theme;
 
   const { code, frontmatter, matter } = await bundleMDX(source, {
     xdmOptions(options) {
-      options.remarkPlugins = [...(options.remarkPlugins ?? []), [remarkCodeHike, { theme }]];
+      options.remarkPlugins = [...(options.remarkPlugins ?? []), [remarkCodeHike, { theme: myTheme }]];
 
       return options;
     },
