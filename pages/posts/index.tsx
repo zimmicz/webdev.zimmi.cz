@@ -1,3 +1,4 @@
+import { GetStaticProps } from 'next';
 import React from 'react';
 import { Layout, NoData, Teaser, Typography } from '../../components';
 import { getPublished, takeLatest } from '../../lib/utils';
@@ -15,7 +16,7 @@ function Posts({ posts }: Props) {
   );
 }
 
-const getStaticProps = async () => {
+const getStaticProps: GetStaticProps<Props> = async () => {
   const posts = await getPublished('post');
   const latest = takeLatest(posts);
 

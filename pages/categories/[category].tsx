@@ -1,3 +1,5 @@
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { NextParsedUrlQuery } from 'next/dist/server/request-meta';
 import React from 'react';
 import { Layout, Teaser, Typography } from '../../components';
 import { getPublished, getAllCategories } from '../../lib/utils';
@@ -7,6 +9,8 @@ type Props = {
   items: PromiseReturnType<ReturnType<typeof getPublished>>;
   category: Post['frontmatter']['categories'][number];
 };
+
+type Params = NextParsedUrlQuery & Pick<Props, 'category'>;
 
 const Category = ({ category, items }: Props) => {
   return (
@@ -22,10 +26,21 @@ const Category = ({ category, items }: Props) => {
   );
 };
 
-const getStaticProps = async ({ params }: { params: { category: Props['category'] } }) => {
-  const posts = await getPublished('post');
-  const snippets = await getPublished('snippet');
-  const items = [...posts, ...snippets];
+const getStaticProps: GetStaticProps<Props, Params> = async (context) => {
+  const posts = getPublished('post');
+  const snippets = getPublished('snippet');
+  const items = [...(await posts), ...(await snippets)];
+
+  if (!context.params?.category) {
+    return {
+      props: {
+        items: [],
+        category: '',
+      },
+    };
+  }
+
+  const { params } = context;
 
   const filtered = items.filter((item) => item.frontmatter.categories.includes(params.category));
 
@@ -37,7 +52,7 @@ const getStaticProps = async ({ params }: { params: { category: Props['category'
   };
 };
 
-const getStaticPaths = async () => {
+const getStaticPaths: GetStaticPaths = async () => {
   const paths = (await getAllCategories()).map((category) => `/categories/${category}`);
   return {
     paths,

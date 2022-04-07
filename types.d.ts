@@ -20,6 +20,7 @@ declare global {
       title: string;
       excerpt: string;
     };
+    matter: unknown;
     readingTime: ReadTimeResults;
     slug: string;
   };

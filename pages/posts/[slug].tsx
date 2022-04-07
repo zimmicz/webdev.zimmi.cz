@@ -1,10 +1,14 @@
 import React from 'react';
 import { getPublished, getSinglePost } from '../../lib/utils';
 import { Layout, Post as PostComponent } from '../../components';
+import { NextParsedUrlQuery } from 'next/dist/server/request-meta';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
 type Props = {
   post: PromiseReturnType<ReturnType<typeof getSinglePost>>;
 };
+
+type Params = NextParsedUrlQuery & Pick<Post, 'slug'>;
 
 const Post = ({ post }: Props) => (
   <Layout>
@@ -12,8 +16,16 @@ const Post = ({ post }: Props) => (
   </Layout>
 );
 
-const getStaticProps = async ({ params }: { params: Pick<Post, 'slug'> }) => {
-  const post = await getSinglePost(params.slug);
+const getStaticProps: GetStaticProps<Props, Params> = async (context) => {
+  if (!context.params?.slug) {
+    return {
+      props: {
+        post: {} as Post,
+      },
+    };
+  }
+
+  const post = await getSinglePost(context.params.slug);
   return {
     props: {
       post,
@@ -21,7 +33,7 @@ const getStaticProps = async ({ params }: { params: Pick<Post, 'slug'> }) => {
   };
 };
 
-const getStaticPaths = async () => {
+const getStaticPaths: GetStaticPaths = async () => {
   const paths = (await getPublished('post')).slice(0, 9).map(({ slug }) => ({ params: { slug } }));
   return {
     paths,
