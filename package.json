@@ -4,9 +4,12 @@
     "commit": "commit",
     "dev": "next dev",
     "build": "next build",
+    "lint": "eslint -c .eslintrc.js --ext .js --ext .ts --ext .mjs --ext .cjs",
+    "lint:staged": "lint-staged -c lint-staged.config.js",
     "start": "next start",
     "build:bin": "cd bin && npx tsc -p tsconfig.json",
-    "write": "node --es-module-specifier-resolution=node --experimental-json-modules bin/dist/bin/write.js"
+    "write": "node --es-module-specifier-resolution=node --experimental-json-modules bin/dist/bin/write.js",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@reach/menu-button": "^0.16.2",
@@ -47,12 +50,14 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
     "js-yaml": "^4.1.0",
+    "lint-staged": "^12.3.7",
     "postcss": "^8.3.5",
     "prettier": "^2.4.1",
     "tailwindcss": "^2.2.4",
     "ts-node": "^10.7.0",
     "txtgen": "^2.2.8",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "husky": "^7.0.0"
   },
   "engines": {
     "node": "^14"
