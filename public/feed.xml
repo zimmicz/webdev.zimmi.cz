@@ -4,7 +4,7 @@
         <title>Michal Zimmermann</title>
         <link>https://webdev.zimmi.cz</link>
         <description>Pieces of knowledge from the world of web development.</description>
-        <lastBuildDate>Wed, 06 Apr 2022 18:47:51 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 07 Apr 2022 06:07:30 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -15,7 +15,34 @@
             <guid>https://webdev.zimmi.cz/posts/using-mapped-types-to-access-object-properties</guid>
             <pubDate>Tue, 05 Apr 2022 22:00:00 GMT</pubDate>
             <description><![CDATA[Using mapped types to access object properties]]></description>
-            <content:encoded><![CDATA[<div class="ch-codeblock not-prose"><div class="ch-code" style="margin:0;padding:0;white-space:pre;overflow:hidden;opacity:0"><code class="ch-code-scroll-parent"><br/><div><div style="display:inline-block"><span>type Configuration = {</span></div></div><div><div style="display:inline-block"><span>  &#x27;one&#x27;: number;</span></div></div><div><div style="display:inline-block"><span>  &#x27;two&#x27;: string[];</span></div></div><div><div style="display:inline-block"><span>  &#x27;three&#x27;: () =&gt; void;</span></div></div><div><div style="display:inline-block"><span>}</span></div></div><div><div style="display:inline-block"><span></span></div></div><div><div style="display:inline-block"><span>// ✅ right</span></div></div><div><div style="display:inline-block"><span>const fn = (what: { [key in keyof Configuration ]: Configuration[key]}) =&gt; {</span></div></div><div><div style="display:inline-block"><span>  if (what.one) {</span></div></div><div><div style="display:inline-block"><span>    what.one.toFixed();</span></div></div><div><div style="display:inline-block"><span>  }</span></div></div><div><div style="display:inline-block"><span></span></div></div><div><div style="display:inline-block"><span>  if (what.two) {</span></div></div><div><div style="display:inline-block"><span>    what.two.slice(0, 1);</span></div></div><div><div style="display:inline-block"><span>  }</span></div></div><div><div style="display:inline-block"><span></span></div></div><div><div style="display:inline-block"><span>  if (what.three) {</span></div></div><div><div style="display:inline-block"><span>    what.three();</span></div></div><div><div style="display:inline-block"><span>  }</span></div></div><div><div style="display:inline-block"><span>}</span></div></div><div><div style="display:inline-block"><span></span></div></div><div><div style="display:inline-block"><span>// ❌ wrong</span></div></div><div><div style="display:inline-block"><span>const fn2 = (what: Record&lt;Key, Configuration[Key]&gt;) =&gt; {</span></div></div><div><div style="display:inline-block"><span>  if (what.one) {</span></div></div><div><div style="display:inline-block"><span>    what.one.toFixed();</span></div></div><div><div style="display:inline-block"><span>  }</span></div></div><div><div style="display:inline-block"><span>}</span></div></div><br/></code></div></div>]]></content:encoded>
+            <content:encoded><![CDATA[<pre><code class="language-js">type Configuration = {
+  &#x27;one&#x27;: number;
+  &#x27;two&#x27;: string[];
+  &#x27;three&#x27;: () =&gt; void;
+}
+
+// ✅ right
+const fn = (what: { [key in keyof Configuration ]: Configuration[key]}) =&gt; {
+  if (what.one) {
+    what.one.toFixed();
+  }
+
+  if (what.two) {
+    what.two.slice(0, 1);
+  }
+
+  if (what.three) {
+    what.three();
+  }
+}
+
+// ❌ wrong
+const fn2 = (what: Record&lt;Key, Configuration[Key]&gt;) =&gt; {
+  if (what.one) {
+    what.one.toFixed();
+  }
+}
+</code></pre>]]></content:encoded>
             <author>zimmicz@gmail.com (Michal Zimmermann)</author>
         </item>
     </channel>

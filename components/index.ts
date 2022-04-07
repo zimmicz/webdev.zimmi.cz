@@ -11,3 +11,4 @@ export * from './written-at';
 export * from './back-to-top';
 export * from './loading-indicator';
 export * from './no-data';
+export * from './reading-time';

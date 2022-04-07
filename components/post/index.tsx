@@ -1,15 +1,20 @@
 import React from 'react';
+import Prism from 'prismjs';
 import { getMDXComponent } from 'mdx-bundler/client';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Typography, WrittenAt } from '..';
-import { BannerImage } from '../banner-image';
-import { ReadingTime } from '../reading-time';
+import { Typography, WrittenAt, ReadingTime, BannerImage } from '..';
 import { withAnchor } from '../../hoc/anchor';
 import { PATHS } from '../../config';
 
+Prism.manual = true;
+
 const Post = (props: Post) => {
   const Component = React.useMemo(() => getMDXComponent(props.code), [props.code]);
+
+  React.useEffect(() => {
+    Prism.highlightAll();
+  }, []);
 
   return (
     <BasePost {...props}>
@@ -25,6 +30,7 @@ const Post = (props: Post) => {
             p: Typography.Paragraph,
             ol: Typography.Ol,
             ul: Typography.Ul,
+            pre: (props) => <pre className="line-numbers">{props.children}</pre>,
           }}
         />
       </div>

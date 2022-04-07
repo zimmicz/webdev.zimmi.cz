@@ -1,6 +1,5 @@
 import React from 'react';
 import '../public/css/global.css';
-import '@code-hike/mdx/dist/index.css';
 import type { AppProps } from 'next/app';
 import { AnimatePresence } from 'framer-motion';
 import { LoadingIndicator, BackToTop, Header } from '../components';
