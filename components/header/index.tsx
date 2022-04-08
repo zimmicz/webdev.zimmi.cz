@@ -1,7 +1,7 @@
 import { motion, useAnimation } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
-import { MenuLink } from '..';
+import { MenuLink } from '../menu-link';
 import FileText from '../../public/icons/file-text.svg';
 import Code from '../../public/icons/code.svg';
 import Rss from '../../public/icons/rss.svg';

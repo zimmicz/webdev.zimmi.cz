@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { MenuItems, MenuLink as ReachUIMenuLink, MenuPopover } from '@reach/menu-button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { positionRight } from '@reach/popover';
-import { MenuLink } from '../../../';
+import { MenuLink } from '../../../menu-link';
 import { API_ROUTES, PATHS } from '../../../../config';
 
 const Categories = () => {
