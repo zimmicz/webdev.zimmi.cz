@@ -20,7 +20,9 @@ const BannerImage = ({ credit, aspectRatio, url, ...props }: Defined<Post['front
 
     element.setAttribute('src', dataSrc);
   };
-  const ref = useIntersectionObserver<HTMLImageElement>(onIntersection);
+  const ref = useIntersectionObserver<HTMLImageElement>(onIntersection, {
+    once: true,
+  });
 
   return (
     <div className={`aspect-[${width}/${height}] scale-95`}>

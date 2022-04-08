@@ -1,4 +1,4 @@
-import { motion, useAnimation, useViewportScroll } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
 import { MenuLink } from '..';
@@ -7,15 +7,96 @@ import Code from '../../public/icons/code.svg';
 import Rss from '../../public/icons/rss.svg';
 import ChevronDown from '../../public/icons/chevron-down.svg';
 import { BLOG_TITLE, BLOG_DESCRIPTION, PATHS } from '../../config';
-import { useToggle } from '../../hooks';
+import { useIntersectionObserver, useToggle } from '../../hooks';
 import { Menu, MenuButton } from '@reach/menu-button';
 import { Categories } from './components/categories';
 
+const ExpandedContext = React.createContext(true);
+
+const useExpandedContext = () => {
+  const context = React.useContext(ExpandedContext);
+
+  if (typeof context === 'undefined') {
+    throw new Error('Cannot use ExpandedContext outside Provider component.');
+  }
+
+  return context;
+};
+
+const useClassnames = () => {
+  const expanded = useExpandedContext();
+
+  return expanded ? classNames.expanded : classNames.mini;
+};
+
 const Header = () => {
-  const { scrollY } = useViewportScroll();
-  const menuControls = useAnimation();
   const [expanded, { setOn: expand, setOff: collapse }] = useToggle(true);
-  const { navigation, header, content, title, description } = expanded ? classNames.expanded : classNames.mini;
+  const { header } = useClassnames();
+  const ref = useIntersectionObserver(
+    (isInView) => {
+      isInView ? expand() : collapse();
+    },
+    {
+      threshold: 0.5,
+    },
+  );
+
+  return (
+    <ExpandedContext.Provider value={expanded}>
+      <motion.header
+        aria-hidden={!expanded}
+        layout
+        ref={ref}
+        transition={{ duration: 0.25, type: 'spring' }}
+        className={`${header}`}
+      >
+        <Title>
+          <Navigation />
+        </Title>
+      </motion.header>
+      <CollapsedHeader />
+    </ExpandedContext.Provider>
+  );
+};
+
+const CollapsedHeader = () => {
+  const expanded = useExpandedContext();
+  const { header } = useClassnames();
+
+  if (expanded) {
+    return null;
+  }
+
+  return (
+    <motion.header aria-hidden={expanded} className={header}>
+      <Title>
+        <Navigation />
+      </Title>
+    </motion.header>
+  );
+};
+
+const Title = ({ children }: React.PropsWithChildren<unknown>) => {
+  const { content, title, description } = useClassnames();
+
+  return (
+    <div className={content}>
+      <div>
+        <Link href="/" passHref>
+          <a>
+            <h1 className={title}>{BLOG_TITLE}</h1>
+          </a>
+        </Link>
+        <p className={description}>{BLOG_DESCRIPTION}</p>
+      </div>
+      {children}
+    </div>
+  );
+};
+
+const Navigation = () => {
+  const { navigation } = useClassnames();
+  const menuControls = useAnimation();
   const menuItems = [
     ...menuLinks.slice(0, 2),
     <MyMenuButton
@@ -32,19 +113,6 @@ const Header = () => {
   ];
 
   React.useEffect(() => {
-    const handler = () => {
-      // prevent header flickering when going to mini mode
-      if (scrollY.get() > 200 || (scrollY.get() < 200 && scrollY.getPrevious() > 200)) {
-        collapse();
-      } else {
-        expand();
-      }
-    };
-
-    return scrollY.onChange(handler);
-  }, []);
-
-  React.useEffect(() => {
     menuControls.set((i) => ({ opacity: 0, x: i * 10 }));
     menuControls.start((i) => ({
       opacity: 1,
@@ -54,40 +122,15 @@ const Header = () => {
   }, []);
 
   return (
-    <motion.header
-      layout
-      variants={{
-        mini: {
-          position: 'sticky',
-          maxHeight: ['150px', '100px'],
-          zIndex: 10,
-        },
-      }}
-      animate="mini"
-      transition={{ duration: 0.25, type: 'spring' }}
-      initial={false}
-      className={`${header} sticky top-0`}
-    >
-      <div className={content}>
-        <div>
-          <Link href="/" passHref>
-            <a>
-              <h1 className={title}>{BLOG_TITLE}</h1>
-            </a>
-          </Link>
-          <p className={description}>{BLOG_DESCRIPTION}</p>
-        </div>
-        <nav className="md:ml-auto w-full sm:w-auto">
-          <ul className={navigation}>
-            {menuItems.map((item, i) => (
-              <motion.li key={i} custom={i} animate={menuControls}>
-                {item}
-              </motion.li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-    </motion.header>
+    <nav className="md:ml-auto w-full sm:w-auto">
+      <ul className={navigation}>
+        {menuItems.map((item, i) => (
+          <motion.li key={i} custom={i} animate={menuControls}>
+            {item}
+          </motion.li>
+        ))}
+      </ul>
+    </nav>
   );
 };
 
@@ -145,7 +188,7 @@ const menuLinks = [
 
 const classNames = {
   mini: {
-    header: 'bg-gray-100 h-20 p-5 sticky top-0 z-10 font-title font-bold w-full top-0 flex h-auto justify-center',
+    header: 'bg-gray-100 h-20 p-5 fixed font-title font-bold w-full top-0 flex h-auto justify-center',
     content:
       'max-w-[100%] w-[90ch] flex mx-auto items-center flex-wrap md:flex-nowrap justify-center sm:justify-between space-y-0',
     title: 'text-xl justify-center',
@@ -153,7 +196,7 @@ const classNames = {
     navigation: 'flex space-x-5 justify-center',
   },
   expanded: {
-    header: 'bg-gray-100 p-5 md:py-10 sticky top-0 font-title font-bold w-full flex',
+    header: 'bg-gray-100 p-5 md:py-10 font-title font-bold w-full flex',
     content: 'max-w-[100%] w-[90ch] flex mx-auto items-center flex-wrap md:flex-nowrap justify-center',
     title: 'text-5xl sm:text-7xl',
     description: 'sm:text-lg md:text-2xl text-gray-500 sm:mt-5 my-2 text-center md:text-left',
