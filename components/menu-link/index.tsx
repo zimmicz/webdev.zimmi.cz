@@ -6,7 +6,7 @@ type LinkProps = Pick<React.ComponentProps<typeof Link>, 'href' | 'children'> & 
 
 const MenuLink = React.forwardRef(
   (
-    { onClick, href, children, className }: { className?: string } & Partial<LinkProps>,
+    { onClick, href, children, className, ...props }: { className?: string } & Partial<LinkProps>,
     ref: React.Ref<HTMLAnchorElement>,
   ) => {
     return (
@@ -15,6 +15,7 @@ const MenuLink = React.forwardRef(
         onClick={onClick}
         href={href?.toString()}
         className={`${className} py-2 text-primary text-decoration-fade from-primary to-primary`}
+        {...props}
       >
         {children}
       </motion.a>

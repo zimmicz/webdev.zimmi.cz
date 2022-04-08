@@ -134,16 +134,6 @@ const Navigation = () => {
   );
 };
 
-const MyMenuLink = React.forwardRef(
-  ({ children, ...props }: React.PropsWithChildren<unknown>, ref: React.Ref<HTMLAnchorElement>) => (
-    <MenuLink ref={ref} className="flex items-center space-x-3 self-center" {...props}>
-      {children}
-    </MenuLink>
-  ),
-);
-
-MyMenuLink.displayName = 'MyMenuLink';
-
 const MyMenuButton = ({
   renderButton,
   renderContent,
@@ -164,25 +154,22 @@ const MyMenuButton = ({
 
 const menuLinks = [
   <Link key={PATHS.posts} href={PATHS.posts} passHref>
-    {/*// @ts-expect-error types */}
-    <MyMenuLink>
+    <MenuLink className="flex items-center space-x-3 self-center" data-testid={PATHS.posts}>
       <span>posts</span>
       <FileText className="my-icon-primary hidden sm:block" />
-    </MyMenuLink>
+    </MenuLink>
   </Link>,
   <Link key={PATHS.snippets} href={PATHS.snippets} passHref>
-    {/*// @ts-expect-error types */}
-    <MyMenuLink>
+    <MenuLink className="flex items-center space-x-3 self-center" data-testid={PATHS.snippets}>
       <span>snippets</span>
       <Code className="my-icon-primary self-end hidden sm:block" />
-    </MyMenuLink>
+    </MenuLink>
   </Link>,
   <Link key={PATHS.rss} href={PATHS.rss} passHref>
-    {/*// @ts-expect-error types */}
-    <MyMenuLink>
+    <MenuLink className="flex items-center space-x-3 self-center" data-testid={PATHS.rss}>
       <span>rss</span>
       <Rss className="my-icon-primary hidden sm:block" />
-    </MyMenuLink>
+    </MenuLink>
   </Link>,
 ];
 
