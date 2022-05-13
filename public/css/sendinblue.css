@@ -1,0 +1,42 @@
+#sib-container {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+#sib-container * {
+    box-sizing: border-box;
+}
+
+.sib-form {
+    font-size: unset;
+}
+
+.sib-form,
+.entry__choice,
+.sib-form label {
+    font-family: inherit;
+}
+
+.sib-form .entry__field {
+    background-color: transparent;
+    border: none;
+}
+
+.sib-form .input {
+    padding-right: 0;
+    width: unset;
+}
+
+.sib-form-block {
+    padding: 0;
+}
+
+.sib-form-message-panel {
+    border: 0;
+}
+
+.sib-form my-sidenote-success,
+.sib-form my-sidenote-warning,
+.sib-form my-sidenote-info {
+    margin: 0;
+}

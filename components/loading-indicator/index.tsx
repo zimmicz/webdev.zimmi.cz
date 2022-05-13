@@ -33,6 +33,8 @@ const LoadingIndicator = () => {
   );
 };
 
+// https://10015.io/tools/css-loader-generator
+
 const style = {
   width: '25px',
   height: '30px',
