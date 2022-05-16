@@ -175,7 +175,7 @@ const menuLinks = [
 
 const classNames = {
   mini: {
-    header: 'bg-gray-100 h-20 p-5 fixed font-title font-bold w-full top-0 flex h-auto justify-center',
+    header: 'bg-gray-100 h-20 p-5 fixed font-title font-bold w-full top-0 flex h-auto justify-center z-10',
     content:
       'max-w-[100%] w-[90ch] flex mx-auto items-center flex-wrap md:flex-nowrap justify-center sm:justify-between space-y-0',
     title: 'text-xl justify-center',

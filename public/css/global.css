@@ -3,67 +3,75 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'Phenomena';
-    src: url('/fonts/Phenomena/Phenomena-Light.woff2') format('woff2');
-    font-style: normal;
-    font-weight: 300;
-    font-display: swap;
+  font-family: 'Phenomena';
+  src: url('/fonts/Phenomena/Phenomena-Light.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Phenomena';
-    src: url('/fonts/Phenomena/Phenomena-Regular.woff2') format('woff2');
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
+  font-family: 'Phenomena';
+  src: url('/fonts/Phenomena/Phenomena-Regular.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Phenomena';
-    src: url('/fonts/Phenomena/Phenomena-Bold.woff2') format('woff2');
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
+  font-family: 'Phenomena';
+  src: url('/fonts/Phenomena/Phenomena-Bold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Fredoka';
-    src: url('/fonts/Fredoka/static/Fredoka/Fredoka-Regular.ttf') format('truetype');
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
+  font-family: 'Fredoka';
+  src: url('/fonts/Fredoka/static/Fredoka/Fredoka-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
 }
 
 html {
-    @apply text-gray-800 font-text overflow-x-hidden;
+  @apply text-gray-800 font-text overflow-x-hidden;
+}
+
+code {
+  @apply text-primary border px-2;
+}
+
+pre code {
+  @apply border-0 px-0;
 }
 
 a.text-decoration-fade {
-    @apply transition-colors transition-bg bg-gradient-to-r duration-300 bg-no-repeat bg-left-bottom bg-0-2 hover:bg-full-2;
+  @apply transition-colors transition-bg bg-gradient-to-r duration-300 bg-no-repeat bg-left-bottom bg-0-2 hover:bg-full-2;
 }
 
 svg.my-icon {
-    @apply stroke-subtle;
+  @apply stroke-subtle;
 }
 
 svg.my-icon-primary {
-    @apply stroke-primary;
+  @apply stroke-primary;
 }
 
 @layer components {
-    .sidenote {
-        @apply text-sidenote block border-l-4 px-4 py-2 my-8 relative;
-    }
+  .sidenote {
+    @apply text-sidenote block border-l-4 px-4 py-2 my-8 relative;
+  }
 }
 
 my-sidenote-info {
-    @apply sidenote text-info-700 border-info bg-info-200 rounded-r-md;
+  @apply sidenote text-info-700 border-info bg-info-200 rounded-r-md;
 }
 
 my-sidenote-warning {
-    @apply sidenote text-warning-700 border-warning bg-warning-200 rounded-r-md;
+  @apply sidenote text-warning-700 border-warning bg-warning-200 rounded-r-md;
 }
 
 my-sidenote-success {
-    @apply sidenote text-success-700 border-success bg-success-200 rounded-r-md;
+  @apply sidenote text-success-700 border-success bg-success-200 rounded-r-md;
 }
