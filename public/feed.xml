@@ -4,11 +4,73 @@
         <title>Michal Zimmermann</title>
         <link>https://webdev.zimmi.cz</link>
         <description>Pieces of knowledge from the world of web development.</description>
-        <lastBuildDate>Fri, 13 May 2022 11:52:04 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 16 May 2022 06:15:10 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <copyright>hello</copyright>
+        <item>
+            <title><![CDATA[How to refresh Docker anonymous volumes]]></title>
+            <link>https://webdev.zimmi.cz/posts/how-to-refresh-docker-anonymous-volumes</link>
+            <guid>https://webdev.zimmi.cz/posts/how-to-refresh-docker-anonymous-volumes</guid>
+            <pubDate>Thu, 12 May 2022 22:00:00 GMT</pubDate>
+            <description><![CDATA[How to refresh Docker anonymous volumes]]></description>
+            <content:encoded><![CDATA[<p class="my-5 sm:text-lg undefined">I&#x27;ve been using this <code>Dockerfile</code> to build a node based image.</p>
+<pre><code class="language-docker"># builder
+FROM node:16-alpine as base
+RUN npm install -g pnpm@next-7
+WORKDIR /app
+COPY package.json ./
+
+FROM base as dependencies
+RUN pnpm install --frozen-lockfile
+
+...
+
+# development
+FROM base as development
+ENV NODE_ENV=development
+COPY --from=dependencies --chown=node:node /app/node_modules ./node_modules
+ENV NODE_ENV=development
+USER node
+CMD [&quot;pnpm&quot;, &quot;dev&quot;]
+</code></pre>
+<p class="my-5 sm:text-lg undefined">The image is used in a development <code>docker-compose.yml</code> file like this:</p>
+<pre><code class="language-yaml">version: &#x27;3.7&#x27;
+
+services:
+  frontend:
+    ports:
+      - &#x27;3000:3000&#x27;
+    build:
+      context: ../frontend
+      target: development
+    volumes:
+      - ../frontend:/app
+      - /app/node_modules
+    command: &gt;
+      sh -c &quot;cd /app &amp;&amp; npm run dev&quot;
+</code></pre>
+<p class="my-5 sm:text-lg undefined">As you can see, I&#x27;m not using the <code>node_modules</code> from the host (partially because I&#x27;m using <a href="https://rushjs.io/">Rush</a> to manage the project with <code>pnpm</code>), but rather installing them again when the image is built.</p>
+<p class="my-5 sm:text-lg undefined">If it weren&#x27;t for that <code>- /app/node_modules</code> row, the host <code>node_modules</code> directory will be used inside the container. Since <code>pnpm</code> uses hard links when installing dependencies, the container will complain about wrong paths. But since the row is there, the container&#x27;s <code>node_modules</code> shadows the host&#x27;s one.</p>
+<h2 class="font-title font-bold text-3xl lg:text-5xl my-5 undefined">Installing new dependencies</h2>
+<p class="my-5 sm:text-lg undefined">How do you install a new dependency when needed? Issuing <code>npm i brand-new-dependency</code> on the host updates the <code>package.json</code> file. When the new image is built, it should thus include the new dependency as well. I had hard time to find out that wasn&#x27;t the case though as the app failed to start saying <code>brand-new-dependency does not exist</code>.</p>
+<p class="my-5 sm:text-lg undefined">It seems the anonymous volume created with <code>- /app/node_modules</code> is cached <em>forever</em>, no matter the changes in the underlying data.</p>
+<h2 class="font-title font-bold text-3xl lg:text-5xl my-5 undefined">How to refresh an anonymous volume</h2>
+<p class="my-5 sm:text-lg undefined">Once I realized that, it didn&#x27;t take me long to find the way to refresh the volume when needed (e.g. with every new dependency installed). Here&#x27;s a part of my <code>Makefile</code> that:</p>
+<ul class="list-disc list-inside my-5 sm:text-lg">
+<li>forces service container to stop</li>
+<li>removes it</li>
+<li>removes any anonymous volumes attached to the container (that&#x27;s what <code>-v</code> flag does)</li>
+<li>builds the service again</li>
+<li>runs the service</li>
+</ul>
+<pre><code class="language-bash">rebuild: ## rebuilds services (useful when dependecies change), e.g. ENVIRONMENT=DEV SERVICE=frontend make rebuild
+	cd ./docker &amp;&amp; docker-compose $${DOCKER_COMPOSE_$(ENVIRONMENT)} rm --force --stop -v $(SERVICE) &amp;&amp; docker-compose $${DOCKER_COMPOSE_$(ENVIRONMENT)} build $(SERVICE) &amp;&amp; docker-compose $${DOCKER_COMPOSE_$(ENVIRONMENT)} up $(SERVICE)
+</code></pre>
+<p class="my-5 sm:text-lg undefined">It supports different environments and services that are passed as variables: <code>ENVIRONMENT=DEV SERVICE=frontend make rebuild</code>.</p>]]></content:encoded>
+            <author>zimmicz@gmail.com (Michal Zimmermann)</author>
+        </item>
         <item>
             <title><![CDATA[Using mapped types to access object properties]]></title>
             <link>https://webdev.zimmi.cz/posts/using-mapped-types-to-access-object-properties</link>

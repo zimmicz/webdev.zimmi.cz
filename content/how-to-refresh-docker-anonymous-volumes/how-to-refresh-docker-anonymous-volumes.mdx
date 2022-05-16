@@ -1,0 +1,83 @@
+---
+title: How to refresh Docker anonymous volumes
+type: post
+categories:
+  - docker
+excerpt: >-
+  I spent a few hours debugging why one of my docker containers was starting
+  with outdated node_modules. The culprit was an anonymous volume I used,
+  because it wasn't being refreshed during the start. Once I understood the root
+  cause, I found an easy fix.
+publishedAt: 2022-5-13
+status: published
+
+---
+
+I've been using this `Dockerfile` to build a node based image.
+
+``` docker
+# builder
+FROM node:16-alpine as base
+RUN npm install -g pnpm@next-7
+WORKDIR /app
+COPY package.json ./
+
+FROM base as dependencies
+RUN pnpm install
+
+...
+
+# development
+FROM base as development
+ENV NODE_ENV=development
+COPY --from=dependencies --chown=node:node /app/node_modules ./node_modules
+ENV NODE_ENV=development
+USER node
+CMD ["pnpm", "dev"]
+```
+
+The image is used in a development `docker-compose.yml` file like this:
+
+``` yaml
+version: '3.7'
+
+services:
+  frontend:
+    ports:
+      - '3000:3000'
+    build:
+      context: ../frontend
+      target: development
+    volumes:
+      - ../frontend:/app
+      - /app/node_modules
+    command: >
+      sh -c "cd /app && npm run dev"
+```
+
+As you can see, I'm not using the `node_modules` from the host (partially because I'm using [Rush](https://rushjs.io/) to manage the project with `pnpm`), but rather installing them again when the image is built.
+
+If it weren't for `- /app/node_modules` anonymous volume, the host `node_modules` directory will be used inside the container. Since `pnpm` uses hard links when installing dependencies, the container would complain about wrong paths. But since the row is there, the container's `node_modules` shadows the host's one.
+
+## Installing new dependencies
+
+How do you install a new dependency when needed? Issuing `npm i brand-new-dependency` on the host updates the `package.json` file. When the new image is built, it should thus include the new dependency as well. I had hard time to find out that wasn't the case though as the app failed to start saying `brand-new-dependency does not exist`.
+
+It seems the anonymous volume is cached *forever*, no matter the changes in the underlying data.
+
+## How to refresh an anonymous volume
+
+Once I realized that, it didn't take me long to find the way to refresh the volume when needed (e.g. with every new dependency installed). Here's a part of my `Makefile` that:
+
+- forces service container to stop
+- removes it
+- removes any anonymous volumes attached to the container (that's what `-v` flag does)
+- builds the service again
+- runs the service
+
+``` bash
+rebuild: ## rebuilds services (useful when dependecies change), e.g. ENVIRONMENT=DEV SERVICE=frontend make rebuild
+	cd ./docker && docker-compose $${DOCKER_COMPOSE_$(ENVIRONMENT)} rm --force --stop -v $(SERVICE) && docker-compose $${DOCKER_COMPOSE_$(ENVIRONMENT)} build $(SERVICE) && docker-compose $${DOCKER_COMPOSE_$(ENVIRONMENT)} up $(SERVICE)
+```
+
+It supports different environments and services that are passed as variables: `ENVIRONMENT=DEV SERVICE=frontend make rebuild`.
