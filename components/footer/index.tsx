@@ -1,9 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
-import { Newsletter, Typography } from '..';
+import { Typography } from '..';
 import Profile from '../../public/images/profile.jpeg';
-
-const showNewsletter = false;
 
 const Footer = () => (
   <footer className="w-full bg-gray-300">
@@ -20,14 +18,7 @@ const Footer = () => (
           </Typography.Paragraph>
         </div>
       </div>
-      <div>
-        {showNewsletter ? (
-          <>
-            <Typography.H6 className="text-center">Newsletter</Typography.H6>
-            <Newsletter />
-          </>
-        ) : null}
-      </div>
+      <div></div>
     </div>
     <p className="max-w-screen-lg mx-auto p-5 text-center">
       <small>

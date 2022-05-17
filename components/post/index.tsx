@@ -63,7 +63,6 @@ const BasePost = ({
     </Typography.H1>
     <div className="text-gray-500 flex flex-wrap justify-between text-base gap-2">
       <WrittenAt date={publishedAt} />
-      <ReadingTime readingTime={readingTime} />
       <ul className="flex space-x-6">
         {categories.map((category) => (
           <li key={category}>
