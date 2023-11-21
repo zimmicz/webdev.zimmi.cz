@@ -18,7 +18,7 @@ const arr = [
   {
     property: 'two',
   },
-];
+] as const;
 
 type Property = Pick<typeof arr[number], 'property'>['property'];
 //   ^? type Property = 'one' | 'two'
