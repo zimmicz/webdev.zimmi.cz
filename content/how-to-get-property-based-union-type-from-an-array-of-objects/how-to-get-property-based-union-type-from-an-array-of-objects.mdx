@@ -1,0 +1,25 @@
+---
+title: How to get property based union type from an array of objects
+type: post
+categories:
+  - typescript
+excerpt: >-
+  You might want to use a union type from property values as an argument type for a function. How to derive one from an array of objects?
+publishedAt: '2023-11-21'
+status: published
+
+---
+
+```js
+const arr = [
+  {
+    property: 'one',
+  },
+  {
+    property: 'two',
+  },
+];
+
+type Property = Pick<typeof arr[number], 'property'>['property'];
+//   ^? type Property = 'one' | 'two'
+```

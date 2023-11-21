@@ -3,7 +3,7 @@ import Prism from 'prismjs';
 import { getMDXComponent } from 'mdx-bundler/client';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Typography, WrittenAt, ReadingTime, BannerImage } from '..';
+import { Typography, WrittenAt, BannerImage } from '..';
 import { withAnchor } from '../../hoc/anchor';
 import { PATHS } from '../../config';
 
@@ -49,7 +49,6 @@ const BasePost = ({
   children,
   slug,
   frontmatter: { publishedAt, categories, title, type },
-  readingTime,
 }: React.PropsWithChildren<Post & { className?: string }>) => (
   <motion.section
     initial="rest"

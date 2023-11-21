@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 import React from 'react';
-import { Layout, NoData, Teaser, Typography } from '../components';
+import { Layout, NoData, Teaser } from '../components';
 import { generateFeed } from '../lib/feed';
 import { getPublished, sortByDate, takeLatest } from '../lib/utils';
 
@@ -10,10 +10,7 @@ type Props = {
 
 function Home({ items }: Props) {
   return (
-    <Layout>
-      <Typography.H2 className="py-4">Latest</Typography.H2>
-      {items.length === 0 ? <NoData /> : items.map((item, index) => <Teaser key={index} {...item} />)}
-    </Layout>
+    <Layout>{items.length === 0 ? <NoData /> : items.map((item, index) => <Teaser key={index} {...item} />)}</Layout>
   );
 }
 
